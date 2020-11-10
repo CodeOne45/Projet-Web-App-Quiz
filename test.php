@@ -1,4 +1,6 @@
 <?php
+
+
 //pour y acceder : localhost/test.php
 
 $base = "testDB.sqlite"; //on ouvre ou crée une bd qui s'appelle testDB.sqlite
