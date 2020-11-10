@@ -1,4 +1,6 @@
 <?php
+
+
 //pour y acceder : localhost/test.php
 
 $base = "testDB.sqlite"; //on ouvre ou crée une bd qui s'appelle testDB.sqlite
@@ -33,7 +35,11 @@ try {
     */
 
     //Pour afficher sur le site
+    
+
     print "<table border=1>";
+
+    print "<h1> Test PHP </h1>";
 
     print "<tr><td>Id </td><td> Name </td><td> Email</td></tr>";
 
