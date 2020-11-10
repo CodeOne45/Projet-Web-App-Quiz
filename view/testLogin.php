@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    <p>Lol</p>
+    <label>User name<input>
+        <label>User password<input type="password">
+            <button>Login</button>
 </body>
 
 </html>
