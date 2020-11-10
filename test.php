@@ -33,7 +33,11 @@ try {
     */
 
     //Pour afficher sur le site
+    
+
     print "<table border=1>";
+
+    print "<h1> Test PHP </h1>";
 
     print "<tr><td>Id </td><td> Name </td><td> Email</td></tr>";
 
