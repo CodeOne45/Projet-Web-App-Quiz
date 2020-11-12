@@ -6,10 +6,17 @@ session_start();
 $serverName = "localhost";
 $dBUsername = "root";
 $dBPassword = "";
-$dBName = "";
+$dBName = "phpprojectbd";
+
+$conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
+
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 //Conection BD
-try {
+/*try {
     $connect = new PDO("mysql:host=$serverName; dbname=$dBName", $dBUsername, $dBPassword);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -38,16 +45,11 @@ try {
                 $_SESSION["email"] = $_POST["email"];
                 //On lance la session
                 header("location:quiz.php");
-<<<<<<< HEAD
-            }
-            else{
-=======
             } else {
->>>>>>> 9fe8374... Some modification
                 $message = '<label> Wrong Data !!!</label>';
             }
         }
     }
 } catch (PDOException $error) {
     $message = $error->getMessage();
-}
+}*/
