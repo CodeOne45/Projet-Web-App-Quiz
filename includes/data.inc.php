@@ -38,8 +38,12 @@ try {
                 $_SESSION["email"] = $_POST["email"];
                 //On lance la session
                 header("location:quiz.php");
+<<<<<<< HEAD
             }
             else{
+=======
+            } else {
+>>>>>>> 9fe8374... Some modification
                 $message = '<label> Wrong Data !!!</label>';
             }
         }
