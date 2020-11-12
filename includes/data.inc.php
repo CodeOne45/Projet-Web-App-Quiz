@@ -11,7 +11,7 @@ $dBName = "";
 //Conection BD
 try {
     $connect = new PDO("mysql:host=$serverName; dbname=$dBName", $dBUsername, $dBPassword);
-    $coonect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //Lorsqu'on clique sur login
 
@@ -21,7 +21,7 @@ try {
         } else {
             //Request dans BD
             $query = "SELECT * FROM users WHERE email = :email AND password = :password";
-            $statement = $coonect->prepare($query);
+            $statement = $connect->prepare($query);
 
             //Sauvgare de la requete
             $statement->execute(
@@ -40,7 +40,7 @@ try {
                 header("location:quiz.php");
             }
             else{
-                $message = '<label> Wrong Data !!!</label>'
+                $message = '<label> Wrong Data !!!</label>';
             }
         }
     }
