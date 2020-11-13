@@ -1,38 +1,21 @@
 <?php
 
-function emptyInputSignup($nom, $pnom, $email, $pwd)
+function emptyInputSignUp($name, $fName, $email, $pwd)
 {
-    $result = true;
-    if (empty($nom) || empty($pnom) || empty($email) || empty($pwd)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    return (empty($name) || empty($fName) || empty($email) || empty($pwd));
 }
-
 
 function invalidEmail($email)
 {
-    $result = false;
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    return (!filter_var($email, FILTER_VALIDATE_EMAIL));
 }
 
-
-function uidExists($conn, $email)
+function uidExists($connexion, $email)
 {
     $sql = "SELECT * FROM users WHERE userEmail = ?;";
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
-        header('location: ..\view\testBack\testSignin.php?error=stmtfailed');
+        header('location: ..\views\register.php?error=stmtFailed');
         exit();
     }
 
@@ -50,52 +33,49 @@ function uidExists($conn, $email)
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $nom, $pnom, $email, $pwd) // Au niiveau models
+function createUser($connexion, $name, $fName, $email, $pwd) // Au niiveau models
 {
     $sql = "INSERT into users (userSurname,userName,userEmail,userPwd) VALUES (?,?,?,?) ;"; //Placeholders values
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('location: ..\view\testBack\testSignin.php?error=stmtfailed');
+        header('location: ..\views\register.php?error=stmtFailed');
         exit();
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $nom, $pnom, $email, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $fName, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    header('location: ..\view\testBack\testSignin.php?error=none');
+    header('location: ..\views\register.php?error=none');
 }
 
-
-function emptyInputLogin($email, $password) //Not useful
+function emptyInputLogin($email, $pwd) //Not useful
 {
-
-    return empty($email) || empty($password);
+    return empty($email) || empty($pwd);
 }
 
-
-function loginUser($conn, $email, $password)
+function loginUser($connexion, $email, $pwd)
 {
-    $uidExists = uidExists($conn, $email);
+    $uidExists = uidExists($connexion, $email);
 
     if ($uidExists === false) {
-        header('location:  ..\view\testBack\testloginSQL.php?error=wronglogin');
+        header('location: ..\views\register.php?error=wrongLogin');
         exit();
     }
 
     $pwdHashed = $uidExists["usersPwd"];
-    $checkPwd = password_verify($password, $pwdHashed);
+    $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header('location:  ..\view\testBack\testloginSQL.php?error=wronglogin'); //Au niveau controller
+        header('location: ..\views\register.php?error=wrongLogin'); //Au niveau controller
         exit();
     }
 
     session_start(); //TODO:A changer
 
-    $_SESSION["userid"] = $uidExists["usersID"];
+    $_SESSION["userId"] = $uidExists["usersID"];
     $_SESSION["userName"] = $uidExists["usersName"];
 
     header('location: ..\views\index.php');

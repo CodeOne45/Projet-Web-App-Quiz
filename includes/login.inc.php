@@ -1,21 +1,20 @@
 <?php
 
-
 if (isset($_POST["submit"])) {
 
     $email = $_POST["email"];
-    $password = $_POST["password"];
+    $pwd = $_POST["password"];
 
     require_once 'data.inc.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputLogin($email, $password) !== false) {
-        header('location: ..\view\testBack\testloginSQL.php?error=emptyinput');
+    if (emptyInputLogin($email, $pwd) !== false) {
+        header('location: ..\views\login.php?error=emptyInput');
         exit();
     }
 
-    loginUser($conn, $email, $password);
+    loginUser($connexion, $email, $pwd);
 } else {
-    header('location:  ..\view\testBack\testloginSQL.php');
+    header('location: ..\views\login.php');
     exit();
 }

@@ -8,10 +8,9 @@ $dBUsername = "root";
 $dBPassword = "";
 $dBName = "phpprojectbd";
 
-$conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
+$connexion = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
 
-
-if (!$conn) {
+if (!$connexion) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
