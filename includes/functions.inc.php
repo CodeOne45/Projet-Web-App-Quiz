@@ -31,7 +31,7 @@ function uidExists($conn, $email)
 {
     $sql = "SELECT * FROM users WHERE userEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
+    if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
         header('location: ..\view\testBack\testSignin.php?error=stmtfailed');
         exit();
     }
@@ -44,14 +44,13 @@ function uidExists($conn, $email)
     if ($row = mysqli_fetch_assoc($resultData)) {
         return $row;
     } else {
-        $result = false;
-        return $result;
+        return false;
     }
 
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $nom, $pnom, $email, $pwd)
+function createUser($conn, $nom, $pnom, $email, $pwd) // Au niiveau models
 {
     $sql = "INSERT into users (userSurname,userName,userEmail,userPwd) VALUES (?,?,?,?) ;"; //Placeholders values
     $stmt = mysqli_stmt_init($conn);
@@ -70,15 +69,10 @@ function createUser($conn, $nom, $pnom, $email, $pwd)
 }
 
 
-function emptyInputLogin($email, $password)
+function emptyInputLogin($email, $password) //Not useful
 {
-    $result;
-    if (empty($email) || empty($password)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
+
+    return empty($email) || empty($password);
 }
 
 
@@ -87,7 +81,7 @@ function loginUser($conn, $email, $password)
     $uidExists = uidExists($conn, $email);
 
     if ($uidExists === false) {
-        header('location:  ..\view\testBack\testloginSQL.php?errot=wronglogin');
+        header('location:  ..\view\testBack\testloginSQL.php?error=wronglogin');
         exit();
     }
 
@@ -95,14 +89,15 @@ function loginUser($conn, $email, $password)
     $checkPwd = password_verify($password, $pwdHashed);
 
     if ($checkPwd === false) {
-        header('location:  ..\view\testBack\testloginSQL.php?errot=wronglogin');
-        exit();
-    } else if ($checkPwd === true) {
-        session_start();
-        $_SESSION["userid"] = $uidExists["usersID"];
-        $_SESSION["userName"] = $uidExists["usersName"];
-
-        header('location: ..\views\index.php');
+        header('location:  ..\view\testBack\testloginSQL.php?error=wronglogin'); //Au niveau controller
         exit();
     }
+
+    session_start(); //TODO:A changer
+
+    $_SESSION["userid"] = $uidExists["usersID"];
+    $_SESSION["userName"] = $uidExists["usersName"];
+
+    header('location: ..\views\index.php');
+    exit();
 }

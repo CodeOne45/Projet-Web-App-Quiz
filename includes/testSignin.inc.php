@@ -11,22 +11,22 @@ if (isset($_POST["submit"])) {
     require_once 'functions.inc.php';
 
     if (emptyInputSignup($nom, $pnom, $email, $pwd) !== false) {
-        header('location: ..\view\testBack\testSignin.php?error=emptyinput');
+        header('location: ..\view\testBack\testSignIn.php?error=emptyinput');
         exit();
     }
 
     if (invalidEmail($email) !== false) {
-        header('location: ..\view\testBack\testSignin.php?error=invalidemail');
+        header('location: ..\view\testBack\testSignIn.php?error=invalidemail');
         exit();
     }
 
 
     if (uidExists($conn, $email) !== false) {
-        header('location: ..\view\testBack\testSignin.php?error=usernametaken');
+        header('location: ..\view\testBack\testSignIn.php?error=usernametaken');
         exit();
     }
 
     createUser($conn, $nom, $pnom, $email, $pwd);
 } else {
-    header('location: ..\view\testBack\testSignin.php');
+    header('location: ..\view\testBack\testSignIn.php');
 }
