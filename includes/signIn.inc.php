@@ -1,31 +1,30 @@
 <?php
-
+echo 'test';
 if (isset($_POST["submit"])) {
 
-    $nom = $_POST["name"];
-    $pnom = $_POST["firstName"];
+    $username = $_POST["username"];
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
 
     require_once 'data.inc.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputSignUp($nom, $pnom, $email, $pwd) !== false) {
-        header('location: ..\views\register.php?error=emptyinput');
+    if (emptyInputSignUp($username, $email, $pwd) !== false) {
+        header('location: ..\views\register.php?error=emptyInput');
         exit();
     }
 
     if (invalidEmail($email) !== false) {
-        header('location: ..\views\register.php?error=invalidemail');
+        header('location: ..\views\register.php?error=invalidEmail');
         exit();
     }
 
     if (uidExists($connexion, $email) !== false) {
-        header('location: ..\views\register.php?error=usernametaken');
+        header('location: ..\views\register.php?error=usernameTaken');
         exit();
     }
 
-    createUser($connexion, $nom, $pnom, $email, $pwd);
+    createUser($connexion, $username, $email, $pwd);
 } else {
     header('location: ..\views\register.php');
 }

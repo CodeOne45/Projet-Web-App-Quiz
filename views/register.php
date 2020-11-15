@@ -25,14 +25,14 @@ include_once 'header.php';
 
             <div class="form-group">
                 <label for="name">Username</label>
-                <input type="text" class="form-control" name="username"" placeholder="Username">
+                <input type="text" class="form-control" name="username" placeholder="Username">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="pwd" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Sign un</button>
+            <button type="submit" class="btn btn-primary" name="submit">Sign un</button>
 
             <a href="login.php">Already registered ? Click here</a>
         </form>
@@ -51,7 +51,9 @@ include_once 'header.php';
         }
         ?>
     </section>
-
+<pre>
+    <?php var_dump($_POST);?>
+</pre>
 <?php
 include_once 'footer.php';
 ?>

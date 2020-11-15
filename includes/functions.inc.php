@@ -1,8 +1,8 @@
 <?php
 
-function emptyInputSignUp($name, $fName, $email, $pwd)
+function emptyInputSignUp($username, $email, $pwd)
 {
-    return (empty($name) || empty($fName) || empty($email) || empty($pwd));
+    return (empty($username) || empty($email) || empty($pwd));
 }
 
 function invalidEmail($email)
@@ -12,7 +12,7 @@ function invalidEmail($email)
 
 function uidExists($connexion, $email)
 {
-    $sql = "SELECT * FROM users WHERE userEmail = ?;";
+    $sql = 'SELECT * FROM users WHERE email = ?;';
     $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
         header('location: ..\views\register.php?error=stmtFailed');
@@ -33,10 +33,11 @@ function uidExists($connexion, $email)
     mysqli_stmt_close($stmt);
 }
 
-function createUser($connexion, $name, $fName, $email, $pwd) // Au niiveau models
+function createUser($connexion, $username, $email, $pwd) // Au niveau models
 {
-    $sql = "INSERT into users (userSurname,userName,userEmail,userPwd) VALUES (?,?,?,?) ;"; //Placeholders values
+    $sql = 'INSERT INTO users (username,email,pwd) VALUES (?,?,?);'; //Placeholders values
     $stmt = mysqli_stmt_init($connexion);
+    echo "<script>console.log('Debug Objects: " . "$username, $email, $pwd " . "' );</script>";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ..\views\register.php?error=stmtFailed');
         exit();
@@ -44,7 +45,7 @@ function createUser($connexion, $name, $fName, $email, $pwd) // Au niiveau model
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $fName, $email, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -65,7 +66,7 @@ function loginUser($connexion, $email, $pwd)
         exit();
     }
 
-    $pwdHashed = $uidExists["usersPwd"];
+    $pwdHashed = $uidExists["pwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
@@ -75,8 +76,8 @@ function loginUser($connexion, $email, $pwd)
 
     session_start(); //TODO:A changer
 
-    $_SESSION["userId"] = $uidExists["usersID"];
-    $_SESSION["userName"] = $uidExists["usersName"];
+    $_SESSION["userId"] = $uidExists["id_user"];
+    $_SESSION["userName"] = $uidExists["username"];
 
     header('location: ..\views\index.php');
     exit();
