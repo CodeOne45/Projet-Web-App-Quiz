@@ -3,12 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : Dim 15 nov. 2020 à 16:30
+-- Généré le : Dim 15 nov. 2020 à 20:46
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -68,7 +69,7 @@ CREATE TABLE `player` (
   `id_player` int(11) NOT NULL,
   `id_game` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
-  `Nickname` varchar(20) NOT NULL,
+  `Nickname` varchar(10) NOT NULL,
   `score` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -95,7 +96,7 @@ CREATE TABLE `questions` (
 
 CREATE TABLE `quiz` (
   `id_quiz` int(10) NOT NULL,
-  `name` varchar(40) DEFAULT NULL,
+  `name` char(20) DEFAULT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -107,10 +108,19 @@ CREATE TABLE `quiz` (
 
 CREATE TABLE `users` (
   `id_user` int(10) NOT NULL,
-  `username` varchar(40) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `pwd` varchar(40) NOT NULL
+  `username` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `pwd` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `email`, `pwd`) VALUES
+(1, 'flaviooo', '93270flavio@gmail.com', '$2y$10$Gb2SJdWfoPJfo'),
+(2, 'toto', 'toto@gmail.com', '$2y$10$kM9mHJDsAT.W9'),
+(3, 'xiu', 'xiu@gmail.com', '$2y$10$8rz4EhLedeIb00ktIcmy.u8znNB/nszx5BFrbltbmtl');
 
 --
 -- Index pour les tables déchargées
@@ -145,6 +155,7 @@ ALTER TABLE `game`
 ALTER TABLE `player`
   ADD PRIMARY KEY (`id_player`),
   ADD UNIQUE KEY `id_player` (`id_player`),
+  ADD UNIQUE KEY `Nickname` (`Nickname`),
   ADD KEY `FK_id_user` (`id_user`),
   ADD KEY `FK_id_game` (`id_game`);
 
@@ -161,14 +172,17 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `quiz`
   ADD PRIMARY KEY (`id_quiz`),
-  ADD UNIQUE KEY `id_quiz` (`id_quiz`);
+  ADD UNIQUE KEY `id_quiz` (`id_quiz`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `id_user` (`id_user`);
+  ADD UNIQUE KEY `id_user` (`id_user`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -202,7 +216,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
