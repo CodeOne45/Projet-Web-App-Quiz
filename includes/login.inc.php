@@ -5,6 +5,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST["username"];
     $pwd = $_POST["pwd"];
 
+
     require_once 'data.inc.php';
     require_once 'functions.inc.php';
 
@@ -15,6 +16,6 @@ if (isset($_POST["submit"])) {
 
     loginUser($connexion, $email, $pwd);
 } else {
-    header('location: ..\views\login.php');
+    header('location: ..\views\login.php\error=notWorking');
     exit();
 }

@@ -12,7 +12,12 @@ function invalidEmail($email)
 
 function uidExists($connexion, $email)
 {
+<<<<<<< HEAD
     $sql = "SELECT * FROM users WHERE email = '$email';";
+=======
+    $sql = 'SELECT * FROM users WHERE email = $email;';
+    var_dump($_POST);
+>>>>>>> aad02761984bce1848bc9cb5332f23fee490cab4
     $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
         header('location: ..\views\register.php?error=stmtFailed');
