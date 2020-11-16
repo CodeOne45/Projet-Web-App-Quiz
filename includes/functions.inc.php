@@ -21,13 +21,7 @@ function uidExists($connexion, $email)
 
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
-    //$test = mysqli_stmt_error($stmt);
 
-    //echo 'mysqli_stmt_error($stmt)';
-    //debug_to_console(mysqli_stmt_error($stmt));
-    echo '<script>
-    console.log(<?= json_encode($stmt); ?>);
-</script>';
     $resultData = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($resultData);
     mysqli_stmt_close($stmt);
