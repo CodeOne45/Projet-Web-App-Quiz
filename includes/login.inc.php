@@ -2,7 +2,7 @@
 
 if (isset($_POST["submit"])) {
 
-    $email = $_POST["email"];
+    $email = $_POST["username"];
     $pwd = $_POST["pwd"];
 
     require_once 'data.inc.php';

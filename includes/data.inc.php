@@ -1,7 +1,6 @@
 <?php
 
 //Info BD sqlite
-
 session_start();
 $serverName = "localhost";
 $dBUsername = "root";

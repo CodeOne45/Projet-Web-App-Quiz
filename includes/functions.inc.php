@@ -12,7 +12,7 @@ function invalidEmail($email)
 
 function uidExists($connexion, $email)
 {
-    $sql = 'SELECT * FROM users WHERE email = ?;';
+    $sql = "SELECT * FROM users WHERE email = '$email';";
     $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
         header('location: ..\views\register.php?error=stmtFailed');
@@ -21,22 +21,29 @@ function uidExists($connexion, $email)
 
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
+    //$test = mysqli_stmt_error($stmt);
 
+    //echo 'mysqli_stmt_error($stmt)';
+    //debug_to_console(mysqli_stmt_error($stmt));
+    echo '<script>
+    console.log(<?= json_encode($stmt); ?>);
+</script>';
     $resultData = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($resultData);
+    mysqli_stmt_close($stmt);
 
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
+    if ($row === NULL) {
         return false;
     }
 
-    mysqli_stmt_close($stmt);
+    return $row;
 }
 
 function createUser($connexion, $username, $email, $pwd) // Au niveau models
 {
     $sql = 'INSERT INTO users (username,email,pwd) VALUES (?,?,?);'; //Placeholders values
     $stmt = mysqli_stmt_init($connexion);
+
     echo "<script>console.log('Debug Objects: " . "$username, $email, $pwd " . "' );</script>";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ..\views\register.php?error=stmtFailed');
@@ -47,6 +54,7 @@ function createUser($connexion, $username, $email, $pwd) // Au niveau models
 
     mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
+
     mysqli_stmt_close($stmt);
 
     header('location: ..\views\register.php?error=none');
@@ -60,8 +68,7 @@ function emptyInputLogin($email, $pwd) //Not useful
 function loginUser($connexion, $email, $pwd)
 {
     $uidExists = uidExists($connexion, $email);
-
-    if ($uidExists === false) {
+    if (!$uidExists) {
         header('location: ..\views\register.php?error=wrongLogin');
         exit();
     }
@@ -69,10 +76,13 @@ function loginUser($connexion, $email, $pwd)
     $pwdHashed = $uidExists["pwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
-    if ($checkPwd === false) {
-        header('location: ..\views\register.php?error=wrongLogin'); //Au niveau controller
+    if (!$checkPwd) {
+        header('location: ..\views\login.php?error=wrongPwd'); //Au niveau controller
         exit();
     }
+
+    header('location: ..\views\login.php?error=none'); //Au niveau controller
+
 
     session_start(); //TODO:A changer
 

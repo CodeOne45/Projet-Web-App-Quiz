@@ -1,5 +1,5 @@
 <?php
-echo 'test';
+
 if (isset($_POST["submit"])) {
 
     $username = $_POST["username"];
