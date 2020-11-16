@@ -29,10 +29,24 @@ if (isset($message)) {
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="pwd" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" name="submit">Login</button>
 
             <a href="register.php">Register now</a>
         </form>
+        <?php
+        if (isset($_GET["error"])) {
+            if (isset($_GET["error"]) == "emptyInput"){
+                ///echo "<p> Please, fill in all the information</p>";
+                echo '<script language="javascript">';
+                echo 'alert("Please, fill in all the information")';
+                echo '</script>';
+            }
+            
+            
+            
+        }
+
+        ?>
 
 <?php
 include_once 'footer.php';
