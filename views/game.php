@@ -15,6 +15,10 @@ include_once 'header.php';
     <br>
 </div>
 
+<div id= "Question"class = "numerodelaquestion" style="padding-left : 85%; " >
+    2/4
+</div> 
+
 <div>
 <article class="game_box">
     <img src="th.jpg" alt="Photo de harry potter">
@@ -23,6 +27,7 @@ include_once 'header.php';
     </div>
 </article>
 </div>
+
 
 
 <div class ="answer_box">
@@ -40,12 +45,10 @@ include_once 'header.php';
     <button type="button" onclick="location.href='quiz.php'">Quitter le jeu</button>
 </div>
 
-<div id= "Question"class = "numerodelaquestion" >
-    2/4
-</div>
 
    
 </center></body>
+
     <div classe ="identifiant" style="width: 100px;  padding-top:10px; padding-bottom:10px;border: 3px solid Black; text-align: center;background: white;"> <right>
         <table>
             <tr>
@@ -60,12 +63,13 @@ include_once 'header.php';
     </right></div>
 
 <script language="JavaScript">
-<!--
+
 var startTime = 0
 var start = 0
 var end = 0
 var diff = 0
 var timerID = 0
+window.onload = chronoStart;
 function chrono(){
 	end = new Date()
 	diff = end - start
@@ -79,7 +83,7 @@ function chrono(){
 		sec = "0" + sec
 	}
 
-	document.getElementById("chronotime").innerHTML =min + ":" + sec;
+	document.getElementById("chronotime").value = min + ":" + sec
 	timerID = setTimeout("chrono()", 10)
 }
 function chronoStart(){
@@ -98,11 +102,11 @@ function chronoContinue(){
 	chrono()
 }
 function chronoReset(){
-	document.getElementById("chronotime").innerHTML = "00:00"
+	document.getElementById("chronotime").value = "00:00"
 	start = new Date()
 }
 function chronoStopReset(){
-	document.getElementById("chronotime").innerHTML = "00:00"
+	document.getElementById("chronotime").value = "00:00"
 	document.chronoForm.startstop.onclick = chronoStart
 }
 function chronoStop(){
@@ -113,10 +117,10 @@ function chronoStop(){
 }
 //-->
 </script>
-<span id="chronotime">00:00</span>
-<form name="chronoForm">
-    <input type="button" name="startstop" value="start!" onClick="chronoStart()" />
-    <input type="button" name="reset" value="reset!" onClick="chronoReset()" />
+<form name="chronoForm" style = "padding-left : 80% ; margin-top: 10%;" >
+  <input type="text" name="chronotime" id="chronotime" value="00:00"/>
+    <input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;"/>
+    <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
 </form>
 
 
