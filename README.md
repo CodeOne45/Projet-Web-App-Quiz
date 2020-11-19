@@ -6,7 +6,7 @@ Projet web DUT 20/21 : Web App Quiz
 
 ### Full Demo
 
-[PHP Auiz]
+[PHP Quiz]
 
 ### Requirements
 
