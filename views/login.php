@@ -21,8 +21,8 @@ if (isset($message)) {
 
 <form action="..\includes\login.inc.php" method="post">
     <div class="form-group">
-        <label for="name">Username</label>
-        <input type="text" class="form-control" name="username" placeholder="Username">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" name="email" placeholder="email">
     </div>
 
     <div class="form-group">
