@@ -12,7 +12,7 @@ Projet web DUT 20/21 : Web App Quiz
 
 - PHP 5.3 or higher recommended
 - MySQL DB
-- XAMMP
+- XAMPP
 
 ### Tools Used
 
