@@ -22,7 +22,7 @@ include_once 'header.php';
       </p>
       <?php
       if (isset($_SESSION["userId"])) {
-        echo '<a class="btn btn-primary btn-lg" href="quiz.php" role="button">Créer une partie ! &raquo;</a>';;
+        echo '<a class="btn btn-primary btn-lg" href="quiz.php" role="button">Créer une partie ! &raquo;</a>';
       } else {
         echo '<a class="btn btn-primary btn-lg" href="register.php" role="button">Sign In &raquo;</a>';
         echo '<a class="btn btn-primary btn-lg" href="login.php" role="button">Login &raquo;</a>';
