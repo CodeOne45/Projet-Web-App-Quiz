@@ -21,7 +21,7 @@ include_once 'header.php';
 
 <div>
 <article class="game_box">
-    <img src="th.jpg" alt="Photo de harry potter">
+    <img src="Images/HarryPotter.jpg" alt="Photo de harry potter">
     <div class="quiz_question">
        <p>Bla bla bla ?</p>
     </div>
