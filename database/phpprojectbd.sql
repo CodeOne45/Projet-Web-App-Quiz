@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 16 nov. 2020 à 23:08
--- Version du serveur :  10.4.14-MariaDB
--- Version de PHP : 7.4.11
+-- Hôte : localhost:3306
+-- Généré le : jeu. 19 nov. 2020 à 21:44
+-- Version du serveur :  5.7.24
+-- Version de PHP : 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,27 +25,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `answer_participants`
+-- Structure de la table `answer_player`
 --
 
-CREATE TABLE `answer_participants` (
+DROP TABLE IF EXISTS `answer_player`;
+CREATE TABLE `answer_player` (
   `id_player` int(10) NOT NULL,
-  `id_answer_question` int(10) NOT NULL,
-  `answer` char(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `answer_question`
---
-
-CREATE TABLE `answer_question` (
-  `id_answer_question` int(10) NOT NULL,
   `id_question` int(10) NOT NULL,
-  `answer` text DEFAULT NULL,
-  `correct` binary(1) DEFAULT NULL,
-  `point` int(2) NOT NULL
+  `answer` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -53,10 +41,11 @@ CREATE TABLE `answer_question` (
 -- Structure de la table `game`
 --
 
+DROP TABLE IF EXISTS `game`;
 CREATE TABLE `game` (
   `id_game` int(10) NOT NULL,
   `id_quiz` int(10) NOT NULL,
-  `date` date DEFAULT NULL
+  `date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,27 +54,34 @@ CREATE TABLE `game` (
 -- Structure de la table `player`
 --
 
+DROP TABLE IF EXISTS `player`;
 CREATE TABLE `player` (
-  `id_player` int(11) NOT NULL,
+  `id_player` int(10) NOT NULL,
   `id_game` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
-  `Nickname` varchar(10) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
   `score` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `questions`
+-- Structure de la table `question`
 --
 
-CREATE TABLE `questions` (
-  `id_questions` int(10) NOT NULL,
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE `question` (
+  `id_question` int(10) NOT NULL,
   `id_quiz` int(10) NOT NULL,
-  `level` int(3) DEFAULT NULL,
-  `multiple_answer` binary(1) DEFAULT NULL,
-  `question` text DEFAULT NULL,
-  `themes` varchar(20) NOT NULL
+  `level` int(3) NOT NULL,
+  `text` text NOT NULL,
+  `imageURL` text,
+  `themes` text NOT NULL,
+  `prop1` varchar(64) NOT NULL,
+  `prop2` varchar(64) NOT NULL,
+  `prop3` varchar(64) DEFAULT NULL,
+  `prop4` varchar(64) DEFAULT NULL,
+  `answer` binary(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -94,23 +90,25 @@ CREATE TABLE `questions` (
 -- Structure de la table `quiz`
 --
 
+DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
   `id_quiz` int(10) NOT NULL,
-  `name` char(20) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `name` varchar(20) NOT NULL,
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `id_user` int(10) NOT NULL,
   `username` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `pwd` varchar(50) NOT NULL
+  `pwd` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -118,26 +116,18 @@ CREATE TABLE `users` (
 --
 
 --
--- Index pour la table `answer_participants`
+-- Index pour la table `answer_player`
 --
-ALTER TABLE `answer_participants`
-  ADD KEY `FK_id_player` (`id_player`),
-  ADD KEY `FK_id_answer_question` (`id_answer_question`);
-
---
--- Index pour la table `answer_question`
---
-ALTER TABLE `answer_question`
-  ADD PRIMARY KEY (`id_answer_question`),
-  ADD UNIQUE KEY `id_answer_question` (`id_answer_question`),
-  ADD KEY `FK_id_question` (`id_question`);
+ALTER TABLE `answer_player`
+  ADD PRIMARY KEY (`id_player`,`id_question`),
+  ADD KEY `FK_id_question` (`id_question`),
+  ADD KEY `Fk_id_player` (`id_player`);
 
 --
 -- Index pour la table `game`
 --
 ALTER TABLE `game`
   ADD PRIMARY KEY (`id_game`),
-  ADD UNIQUE KEY `id_game` (`id_game`),
   ADD KEY `FK_id_quiz` (`id_quiz`);
 
 --
@@ -145,17 +135,14 @@ ALTER TABLE `game`
 --
 ALTER TABLE `player`
   ADD PRIMARY KEY (`id_player`),
-  ADD UNIQUE KEY `id_player` (`id_player`),
-  ADD UNIQUE KEY `Nickname` (`Nickname`),
-  ADD KEY `FK_id_user` (`id_user`),
-  ADD KEY `FK_id_game` (`id_game`);
+  ADD KEY `FK_id_game` (`id_game`),
+  ADD KEY `FK_id_user` (`id_user`);
 
 --
--- Index pour la table `questions`
+-- Index pour la table `question`
 --
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id_questions`),
-  ADD UNIQUE KEY `id_questions` (`id_questions`),
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id_question`),
   ADD KEY `FK_quiz_id` (`id_quiz`);
 
 --
@@ -163,15 +150,13 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `quiz`
   ADD PRIMARY KEY (`id_quiz`),
-  ADD UNIQUE KEY `id_quiz` (`id_quiz`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Index pour la table `users`
+-- Index pour la table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `id_user` (`id_user`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -180,22 +165,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pour la table `answer_question`
---
-ALTER TABLE `answer_question`
-  MODIFY `id_answer_question` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id_player` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_player` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `questions`
+-- AUTO_INCREMENT pour la table `question`
 --
-ALTER TABLE `questions`
-  MODIFY `id_questions` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `question`
+  MODIFY `id_question` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `quiz`
@@ -204,9 +183,9 @@ ALTER TABLE `quiz`
   MODIFY `id_quiz` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT;
 
 --
@@ -214,17 +193,11 @@ ALTER TABLE `users`
 --
 
 --
--- Contraintes pour la table `answer_participants`
+-- Contraintes pour la table `answer_player`
 --
-ALTER TABLE `answer_participants`
-  ADD CONSTRAINT `FK_id_answer_question` FOREIGN KEY (`id_answer_question`) REFERENCES `answer_question` (`id_answer_question`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_id_player` FOREIGN KEY (`id_player`) REFERENCES `player` (`id_player`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `answer_question`
---
-ALTER TABLE `answer_question`
-  ADD CONSTRAINT `FK_id_question` FOREIGN KEY (`id_question`) REFERENCES `answer_question` (`id_answer_question`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `answer_player`
+  ADD CONSTRAINT `FK_id_player` FOREIGN KEY (`id_player`) REFERENCES `player` (`id_player`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_id_question` FOREIGN KEY (`id_question`) REFERENCES `question` (`id_question`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `game`
@@ -237,12 +210,12 @@ ALTER TABLE `game`
 --
 ALTER TABLE `player`
   ADD CONSTRAINT `FK_id_game` FOREIGN KEY (`id_game`) REFERENCES `game` (`id_game`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `questions`
+-- Contraintes pour la table `question`
 --
-ALTER TABLE `questions`
+ALTER TABLE `question`
   ADD CONSTRAINT `FK_quiz_id` FOREIGN KEY (`id_quiz`) REFERENCES `quiz` (`id_quiz`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
