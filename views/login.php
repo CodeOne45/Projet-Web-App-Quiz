@@ -5,36 +5,23 @@ if (isset($message)) {
     echo '<label class="text-danger">.$message.</label>';
 }
 ?>
+<div class="container">
+    <form action="..\includes\login.inc.php" method="post">
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input type="text" class="form-control" name="email" placeholder="Email">
+        </div>
 
-<!--<form class="" action="..\includes\login.inc.php" method="post">
-        <label for="">Username</label>
-        <input type="text" name="email" placeholder="Email" value="">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="pwd" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary" name="submit">Login</button>
 
-        <label for="">Password</label>
-        <input type="password" name="password" placeholder="Password" value="">
-
-        <button type="submit" class="btnLogin" name="submit">Login</button>
-
-        <a href="register.php">S'inscrire !</a>
+        <a href="register.php">Register now</a>
     </form>
-    -->
+</div>
 
-<form action="..\includes\login.inc.php" method="post">
-    <div class="form-group">
-        <label for="name">Email</label>
-        <input type="text" class="form-control" name="email" placeholder="email">
-    </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="pwd" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary" name="submit">Login</button>
-
-    <a href="register.php">Register now</a>
-</form>
-
-</form>
 <?php
 if (isset($_GET["error"])) {
     if (isset($_GET["error"]) == "emptyInput") {

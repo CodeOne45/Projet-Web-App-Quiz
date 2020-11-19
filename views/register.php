@@ -3,39 +3,28 @@ include_once 'header.php';
 ?>
 
 <section>
+    <div class="container">
+        <form action="..\includes\signIn.inc.php" method="post">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
 
-    <!--<form action="..\includes\signIn.inc.php" method="post">
-            <input type="text" name="name" placeholder="Last name...">
-            <input type="text" name="firstName" placeholder="First name...">
-            <input type="text" name="email" placeholder="Email...">
-            <input type="password" name="pwd" placeholder="Password...">
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
 
-            <button type="submit" name="submit">Sign up</button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="pwd" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary" name="submit">Sign In</button>
 
-            <a href="login.php">S'inscrire !</a>
+            <a href="login.php">Already registered ? Click here</a>
         </form>
-        -->
-
-    <form action="..\includes\signIn.inc.php" method="post">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-
-        <div class="form-group">
-            <label for="name">Username</label>
-            <input type="text" class="form-control" name="username" placeholder="Username">
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="pwd" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary" name="submit">Sign In</button>
-
-        <a href="login.php">Already registered ? Click here</a>
-    </form>
+    </div>
 
     <?php
     if (isset($_GET["error"])) {
