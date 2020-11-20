@@ -47,13 +47,10 @@ session_start();
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' . $_SESSION["userName"] . '</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" href="settings.php">Paramètres</a>
-                              <a class="dropdown-item" href=""..\includes\logout.inc.php"">logout</a>
+                              <a class="dropdown-item" href="..\includes\logout.inc.php">logout</a>
                             </div>
                     </div>
                 </li>';
-          echo '<li class="nav-item">
-              <a class="nav-link" href="..\includes\logout.inc.php">Logout</a>
-            </li>';
         } else {
           echo '<li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>
