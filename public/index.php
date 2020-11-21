@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
-$router->map('GET', '/', '../views/index');
+$router->map('GET', '/', 'index');
 
 $match = $router->match();
 
