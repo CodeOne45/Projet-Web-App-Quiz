@@ -49,6 +49,8 @@ function createUser($connexion, $username, $email, $pwd) // Au niveau models
     mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
 
+    $message = "Affected rows_=_" . mysqli_stmt_affected_rows($stmt) . "Error_=_" . mysqli_stmt_error($stmt);
+    header('location: ..\views\register.php?error=none'.$message);
     mysqli_stmt_close($stmt);
 
     header('location: ..\views\register.php?error=none');
