@@ -29,7 +29,7 @@ else
                 <p>Number of question : <?=$quiz['nbQuestion']?></p>
                 <p>Theme(s) : <?=$quiz['themes']?></p>
             </article>
-            <button type="button" onclick="location.href='game.php'">Jouez</button>
+            <button type="button" onclick="location.href='game.php'">Create Game</button>
         </div>
     <?php endforeach;?>
 <?php
