@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-include_once '../models/QuizModel.php';
+include_once '../controllers/QuizController.php';
 ?>
 <h2>Quiz List Page</h2>
 <div id="search_bar"> <!-- TODO : Relier à la db -->
@@ -11,26 +11,25 @@ include_once '../models/QuizModel.php';
     </form>
 </div>
 <?php
-$quizData = new QuizModel();
-$filter = "";
-$allQuiz = $quizData->getAllQuizs($filter);
-if (count($allQuiz) == 0) {
-    echo "";
-}
+$filter = isset($_GET['search']) ? $_GET['search'] : null;
+$quizControl = new QuizController($filter);
+$allQuiz = $quizControl->getAllQuizs();
+if (count($allQuiz) == 0)
+    echo "Not Quiz for your search ! Try another search.";
 else
     foreach($allQuiz as $quiz): ?>
         <div class="quiz_box"> <!-- TODO : Un foreach pour chaque quiz qui correspond à la recherche -->
             <h3><?=$quiz['name']?></h3>
             <article class="quiz_description">
-                <h4>Description*</h4>
+                <h4>Description : </h4>
                 <p><?=$quiz['description']?></p>
             </article>
             <article class="quiz_difficulty">
-                <h4>*Quiz's Difficulty*</h4>
-                <p>Number of question in the Quiz : <?=$quiz['nbQuestion']?></p>
-                <p>Themes : *Themes1*, *Themes2*, ...</p>
+                <h4>Difficulty : <?=$quiz['level']?></h4>
+                <p>Number of question : <?=$quiz['nbQuestion']?></p>
+                <p>Theme(s) : <?=$quiz['themes']?></p>
             </article>
-            <button type="button" onclick="location.href='game.php'">Jouez</button> //
+            <button type="button" onclick="location.href='game.php'">Jouez</button>
         </div>
     <?php endforeach;?>
 <?php

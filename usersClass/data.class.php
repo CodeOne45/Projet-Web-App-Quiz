@@ -17,9 +17,10 @@ class Data
         if (!$connexion->set_charset("utf8")) {
             printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n", $connexion->error);
             exit();
-        } else {
-            printf("Jeu de caractères courant : %s\n", $connexion->character_set_name());
         }
+//        else {
+//            printf("Jeu de caractères courant : %s\n", $connexion->character_set_name());
+//        }
         return $connexion;
     }
 
