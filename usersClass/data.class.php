@@ -1,7 +1,6 @@
 <?php
 
-session_start();
-
+/** class model : constructeur récupérer la BD, BD  --> Data : Sangl dans contructeur */
 class Data
 {
 
