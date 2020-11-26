@@ -39,15 +39,19 @@ session_start();
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
+
         <?php
         //User loged in or not
         if (isset($_SESSION["userId"])) {
-          echo '<li class="nav-item">
-              <a class="nav-link" href="profile.php">' . $_SESSION["userName"] . '</a>
-            </li>';
-          echo '<li class="nav-item">
-              <a class="nav-link" href="..\includes\logout.inc.php">Logout</a>
-            </li>';
+           echo '<li class="nav-item">
+                    <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' . $_SESSION["userName"] . '</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="settings.php">Paramètres</a>
+                              <a class="dropdown-item" href="..\includes\logout.inc.php">logout</a>
+                            </div>
+                    </div>
+                </li>';
         } else {
           echo '<li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>
@@ -62,5 +66,8 @@ session_start();
     </div>
 
   </nav>
+</body>
 
+<script src="bootstrap/jquery-2.1.3.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
 </html>

@@ -12,7 +12,7 @@ function invalidEmail($email)
 
 function uidExists($connexion, $email)
 {
-    $sql = "SELECT * FROM users WHERE email = '$email';";
+    $sql = "SELECT * FROM user WHERE email = '$email';";
     $stmt = mysqli_stmt_init($connexion);
     if (!mysqli_stmt_prepare($stmt, $sql)) { //~ --> controller  :afficher l'error
         header('location: ..\views\register.php?error=stmtFailed');
@@ -35,10 +35,10 @@ function uidExists($connexion, $email)
 
 function createUser($connexion, $username, $email, $pwd) // Au niveau models
 {
-    $sql = 'INSERT INTO users (username,email,pwd) VALUES (?,?,?);'; //Placeholders values
+    $sql = 'INSERT INTO user (username,email,pwd) VALUES (?,?,?);'; //Placeholders values
     $stmt = mysqli_stmt_init($connexion);
 
-    echo "<script>console.log('Debug Objects: " . "$username, $email, $pwd " . "' );</script>";
+    
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ..\views\register.php?error=stmtFailed');
         exit();
@@ -49,6 +49,8 @@ function createUser($connexion, $username, $email, $pwd) // Au niveau models
     mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
 
+    $message = "Affected rows_=_" . mysqli_stmt_affected_rows($stmt) . "Error_=_" . mysqli_stmt_error($stmt);
+    header('location: ..\views\register.php?error=none'.$message);
     mysqli_stmt_close($stmt);
 
     header('location: ..\views\register.php?error=none');
