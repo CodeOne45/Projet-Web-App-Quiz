@@ -85,6 +85,6 @@ function loginUser($connexion, $email, $pwd)
     $_SESSION["userId"] = $uidExists["id_user"];
     $_SESSION["userName"] = $uidExists["username"];
 
-    header('location: ..\views\index.php');
+    header('location: ..\views\index');
     exit();
 }

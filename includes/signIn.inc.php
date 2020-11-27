@@ -26,5 +26,5 @@ if (isset($_POST["submit"])) {
 
     createUser($connexion, $username, $email, $pwd);
 } else {
-    header('location: ..\views\register.php');
+    header('location: ..\views\register');
 }

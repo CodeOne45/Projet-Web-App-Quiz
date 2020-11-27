@@ -23,10 +23,10 @@ include_once 'header.php';
       </p>
       <?php
       if (isset($_SESSION["userId"])) {
-        echo '<a class="btn btn-primary btn-lg mr" href="quiz.php" role="button">Créer une partie ! &raquo;</a>';
+        echo '<a class="btn btn-primary btn-lg mr" href="quiz" role="button">Créer une partie ! &raquo;</a>';
       } else {
-        echo '<a class="btn btn-primary btn-lg mr-3" href="register.php" role="button">Sign In &raquo;</a>';
-        echo '<a class="btn btn-primary btn-lg mr-3" href="login.php" role="button">Login &raquo;</a>';
+        echo '<a class="btn btn-primary btn-lg mr-3" href="register" role="button">Sign In &raquo;</a>';
+        echo '<a class="btn btn-primary btn-lg mr-3" href="login" role="button">Login &raquo;</a>';
       }
       ?>
     </div>

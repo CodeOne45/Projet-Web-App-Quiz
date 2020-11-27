@@ -22,7 +22,7 @@ include_once 'header.php';
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Sign In</button>
 
-            <a href="login.php">Already registered ? Click here</a>
+            <a href="login">Already registered ? Click here</a>
         </form>
     </div>
 

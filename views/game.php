@@ -33,16 +33,16 @@ include_once 'header.php';
 <div class ="answer_box">
 <table>
     <tr>
-        <th><a href="game.php">Reponse 1</a></th>
-        <th><a href="game.php">Reponse 2</a></th>
+        <th><a href="game">Reponse 1</a></th>
+        <th><a href="game">Reponse 2</a></th>
     </tr>
     <tr>
-        <th><a href="game.php">Reponse 3</a></th>
-        <th><a href="game.php">Reponse 4</a></th>
+        <th><a href="game">Reponse 3</a></th>
+        <th><a href="game">Reponse 4</a></th>
     </tr>
 </table>
 <br>
-    <button type="button" onclick="location.href='quiz.php'">Quitter le jeu</button>
+    <button type="button" onclick="location.href='quiz'">Quitter le jeu</button>
 </div>
 
 

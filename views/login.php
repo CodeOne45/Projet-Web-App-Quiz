@@ -6,7 +6,7 @@ if (isset($message)) {
 }
 ?>
 <div class="container">
-    <form action="..\includes\login.inc.php" method="post">
+    <form action="..\includes\login.inc" method="post">
         <div class="form-group">
             <label for="name">Email</label>
             <input type="text" class="form-control" name="email" placeholder="Email">
@@ -18,7 +18,7 @@ if (isset($message)) {
         </div>
         <button type="submit" class="btn btn-primary" name="submit">Login</button>
 
-        <a href="register.php">Register now</a>
+        <a href="register">Register now</a>
     </form>
 </div>
 
