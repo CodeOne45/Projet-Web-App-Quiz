@@ -1,13 +1,13 @@
 <?php
 
-namespace controller;
+namespace User;
 
 /**
  * Controller:
  * 
  * @author Aman,Flavio,Xiumin,Loqman & Steven
  */
-class Controller
+class User
 {
 
     protected $View = null;
