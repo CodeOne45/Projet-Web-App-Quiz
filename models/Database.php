@@ -1,17 +1,18 @@
 <?php
+include "../core/Config.php";
 
 class Database
 {
-    static $instance = null;
+    private static ?mysqli $instance = null;
 
     private function __construct()
     {
         $serverName = core\Config::get("DATABASE_HOST");
-        $dBUsername = core\Config::get("DATABASE_NAME");
+        $dBUsername = core\Config::get("DATABASE_USERNAME");
         $dBPassword = core\Config::get("DATABASE_PASSWORD");
         $dBName = core\Config::get("DATABASE_NAME");
 
-        self::$instance = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
+        self::$instance = new mysqli("$serverName", "$dBUsername", "$dBPassword", "$dBName");
 
         if (!self::$instance) {
             die("Connection failed: " . self::$instance->connect_error);
@@ -26,7 +27,7 @@ class Database
     public static function getInstance()
     {
         if (self::$instance == null) {
-            self::$instance = new self();
+            new self();
         }
         return self::$instance;
     }

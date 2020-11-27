@@ -4,7 +4,7 @@ $chemin = "/";
 if($_GET){
     $chemin = isset($_GET["chemin"]) ? $_GET["chemin"] : "/";
 }
-$chemin = str_replace("views/", "", $chemin);
+$chemin = str_replace("public/", "", $chemin);
 //print($chemin);
 
 

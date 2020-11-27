@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once '../views/header.php';
 include_once '../controllers/QuizController.php';
 ?>
 <h2>Quiz List Page</h2>
@@ -34,5 +34,5 @@ if (count($allQuiz) == 0) {
 <?php endforeach;
 } ?>
 <?php
-include_once 'footer.php';
+include_once '../views/footer.php';
 ?>

@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once '../views/header.php';
 ?>
 
 
@@ -21,7 +21,7 @@ include_once 'header.php';
 
 <div>
 <article class="game_box">
-    <img src="Images/HarryPotter.jpg" alt="Photo de harry potter">
+    <img src="../views/Images/HarryPotter.jpg" alt="Photo de harry potter">
     <div class="quiz_question">
        <p>Bla bla bla ?</p>
     </div>
@@ -129,5 +129,5 @@ function chronoStop(){
 
 
 <?php
-include_once 'footer.php';
+include_once '../views/footer.php';
 ?>

@@ -13,8 +13,8 @@ Options -Indexes
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^views\/(.*)$ views/myrouter.php?chemin=$1 [L]
+    RewriteRule ^public\/(.*)$ public/myRouter.php?chemin=$1 [L]
 
 
-    ErrorDocument 404 views/error_404.php
+    ErrorDocument 404 public/error_404.php
 </IfModule>

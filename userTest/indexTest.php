@@ -1,5 +1,5 @@
 <?php
-include_once 'userView.class.php';
+include_once '../controllers/UserController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ include_once 'userView.class.php';
 
 <body>
     <?php
-    $usersObj = new UsersView();
+    $usersObj = new UserController();
     $usersObj->loginUser("malikaman1999@gmail.com", "123456");
     $usersObj->registerUser("KUMAR2", "malikaman@gmail.com", "123456");
     ?>

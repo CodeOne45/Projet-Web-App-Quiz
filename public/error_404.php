@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once '../views/header.php';
 ?>
 
 <div class="page-wrap d-flex flex-row align-items-center">
@@ -16,5 +16,5 @@ include_once 'header.php';
 
 
 <?php
-include_once 'footer.php';
+include_once '../views/footer.php';
 ?>

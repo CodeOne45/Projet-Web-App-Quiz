@@ -1,10 +1,10 @@
 <?php
-include_once 'header.php';
+include_once '../views/header.php';
 ?>
 
 <section>
     <div class="container">
-        <form action="..\includes\signIn.inc.php" method="post">
+        <form action="../controllers/registerController.php" method="post">
             <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -41,5 +41,5 @@ include_once 'header.php';
     ?>
 </section>
 <?php
-include_once 'footer.php';
+include_once '../views/footer.php';
 ?>
