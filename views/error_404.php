@@ -1,6 +1,4 @@
-<?php
-include_once '../views/header.php';
-?>
+<?php afficherVue("header"); ?>
 
 <div class="page-wrap d-flex flex-row align-items-center">
     <div class="container">
@@ -15,6 +13,4 @@ include_once '../views/header.php';
 </div>
 
 
-<?php
-include_once '../views/footer.php';
-?>
+<?php afficherVue("footer"); ?>
