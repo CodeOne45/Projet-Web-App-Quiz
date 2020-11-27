@@ -13,8 +13,8 @@ include_once '../controllers/UserController.php';
 <body>
     <?php
     $usersObj = new UserController();
-    $usersObj->loginUser("malikaman1999@gmail.com", "123456");
-    $usersObj->registerUser("KUMAR2", "malikaman@gmail.com", "123456");
+
+    $usersObj->loginUser("malikaman@gmail.com", "1234056");
     ?>
 </body>
 

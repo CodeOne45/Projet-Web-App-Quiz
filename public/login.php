@@ -6,7 +6,7 @@ if (isset($message)) {
 }
 ?>
 <div class="container">
-    <form action="../controllers/loginController.php" method="post">
+    <form action="../controllers/UserController.php" method="post">
         <div class="form-group">
             <label for="name">Email</label>
             <input type="text" class="form-control" name="email" placeholder="Email">
