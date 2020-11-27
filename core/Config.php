@@ -2,7 +2,6 @@
 
 namespace core;
 
-
 class Config
 {
 

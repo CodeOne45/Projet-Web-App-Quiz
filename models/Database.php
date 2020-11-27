@@ -1,17 +1,18 @@
 <?php
+include "../core/Config.php";
 
 class Database
 {
-    static $instance = null;
+    private static ?mysqli $instance = null;
 
-    private function __constrctor()
+    private function __construct()
     {
         $serverName = core\Config::get("DATABASE_HOST");
-        $dBUsername = core\Config::get("DATABASE_NAME");
+        $dBUsername = core\Config::get("DATABASE_USERNAME");
         $dBPassword = core\Config::get("DATABASE_PASSWORD");
         $dBName = core\Config::get("DATABASE_NAME");
 
-        self::$instance = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
+        self::$instance = new mysqli("$serverName", "$dBUsername", "$dBPassword", "$dBName");
 
         if (!self::$instance) {
             die("Connection failed: " . self::$instance->connect_error);
@@ -20,15 +21,13 @@ class Database
         if (!self::$instance->set_charset("utf8")) {
             printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n", self::$instance->error);
             exit();
-        } else {
-            printf("Jeu de caractères courant : %s\n", self::$instance->character_set_name());
         }
     }
 
     public static function getInstance()
     {
         if (self::$instance == null) {
-            self::$instance = new self();
+            new self();
         }
         return self::$instance;
     }

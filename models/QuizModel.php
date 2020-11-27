@@ -1,10 +1,9 @@
 <?php
-include_once '../usersClass/data.class.php';
-
-class QuizModel extends Data { //a changer, pas d'extends
+include_once 'Database.php';
+class QuizModel { //a changer, pas d'extends
 
     public function getAllQuizs(string $filter){
-        $mysqli = $this->connect(); //changer par $stmt = new data()->getData();
+        $mysqli = Database::getInstance();
         if(empty($filter))
             $sql = 'SELECT * FROM quiz';
         else{
@@ -43,12 +42,11 @@ class QuizModel extends Data { //a changer, pas d'extends
             $compteur += 1;
         }
         $results->free();
-        $mysqli->close();
         return $allQuiz;
     }
 
     public function getAllQuestions(int $quizId){ //Retourne tous les questions d'un quiz
-        $stmt = $this->connect();   //TODO redondance
+        $stmt = Database::getInstance();   //TODO redondance
         $sql = "SELECT * FROM question WHERE id_quiz = $quizId";
         $results = $stmt->query($sql);
         if(!$results){
@@ -60,7 +58,6 @@ class QuizModel extends Data { //a changer, pas d'extends
             $allQuestions[] = $row;
         }
         $results->free();
-        $stmt->close();
         return $allQuestions;
     }
 

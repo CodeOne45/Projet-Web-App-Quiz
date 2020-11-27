@@ -1,11 +1,9 @@
 <?php
 
-
 class Model
 {
-
     /** @var Database An instance of the database class. */
-    protected $Db = null;
+    protected $db = null;
 
     /** @var array The record from the database */
     protected $data = [];
@@ -17,7 +15,7 @@ class Model
      */
     public function __construct()
     {
-        $this->Db = Database::getInstance();
+        $this->db = Database::getInstance();
     }
 
     /**
@@ -32,7 +30,7 @@ class Model
      */
     protected function create($table, array $fields)
     {
-        return ($this->Db->insert($table, $fields));
+        return ($this->db->insert($table, $fields));
     }
 
     /**
@@ -69,7 +67,7 @@ class Model
      */
     protected function find($table, array $where = [])
     {
-        $data = $this->Db->select($table, $where);
+        $data = $this->db->select($table, $where);
         if ($data->count()) {
             $this->data = $data->first();
         }
@@ -91,6 +89,6 @@ class Model
         if (!$recordID and $this->exists()) {
             $recordID = $this->data()->id;
         }
-        return (!$this->Db->update($table, $recordID, $fields));
+        return (!$this->db->update($table, $recordID, $fields));
     }
 }

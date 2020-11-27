@@ -40,7 +40,7 @@ function createUser($connexion, $username, $email, $pwd) // Au niveau models
 
     
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('location: ..\views\register.php?error=stmtFailed');
+        header('location: ../public/register.php?error=stmtFailed');
         exit();
     }
 
@@ -50,10 +50,10 @@ function createUser($connexion, $username, $email, $pwd) // Au niveau models
     mysqli_stmt_execute($stmt);
 
     $message = "Affected rows_=_" . mysqli_stmt_affected_rows($stmt) . "Error_=_" . mysqli_stmt_error($stmt);
-    header('location: ..\views\register.php?error=none'.$message);
+    header('location: ../public/register.php?error=none'.$message);
     mysqli_stmt_close($stmt);
 
-    header('location: ..\views\register.php?error=none');
+    header('location: ../public/register.php?error=none');
 }
 
 function emptyInputLogin($email, $pwd) //Not useful
@@ -65,7 +65,7 @@ function loginUser($connexion, $email, $pwd)
 {
     $uidExists = uidExists($connexion, $email);
     if (!$uidExists) {
-        header('location: ..\views\register.php?error=wrongLogin');
+        header('location: ../public/register.php?error=wrongLogin');
         exit();
     }
 
@@ -73,11 +73,11 @@ function loginUser($connexion, $email, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if (!$checkPwd) {
-        header('location: ..\views\login.php?error=wrongPwd'); //Au niveau controller
+        header('location: ../public/login.php?error=wrongPwd'); //Au niveau controller
         exit();
     }
 
-    header('location: ..\views\login.php?error=none'); //Au niveau controller
+    header('location: ../public/login.php?error=none'); //Au niveau controller
 
 
     session_start(); //TODO:A changer
@@ -85,6 +85,6 @@ function loginUser($connexion, $email, $pwd)
     $_SESSION["userId"] = $uidExists["id_user"];
     $_SESSION["userName"] = $uidExists["username"];
 
-    header('location: ..\views\index');
+    header('location: ../public/index.php');
     exit();
 }

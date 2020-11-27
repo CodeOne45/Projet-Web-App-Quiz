@@ -8,7 +8,6 @@ class QuizController{
     function __construct(?string $search = null) { // search is a string and is nullable
         $this->quizModel = new QuizModel();
         $this->filter = ($search != null) ? $search : "";
-
     }
 
     function getAllQuizs(){

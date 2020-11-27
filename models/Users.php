@@ -1,12 +1,11 @@
 <?php
-include_once 'data.class.php';
 
-class Users extends Data
+class Users
 {
     protected function getUser($email)
     {
         $sql = "SELECT * FROM users WHERE email = '$email';";
-        $stmt = $this->connect();
+        $stmt = Database::getInstance();
 
         $results = $stmt->query($sql);
         $row = $results->fetch_assoc(); //list
@@ -25,12 +24,13 @@ class Users extends Data
     protected function setUser($username, $email, $pwd)
     {
         //$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (username,email,pwd) VALUES ('$username','$email','$pwd');"; //Placeholders values
-        $stmt = $this->connect();
+        $sql = "INSERT INTO users (username,email,pwd) VALUES ('$username','$email','$pwd');"; //TODO use bind
+        $stmt = Database::getInstance();
+
         if ($stmt->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . $stmt->error;
+            echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
         }
 
         $stmt->close();

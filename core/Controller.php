@@ -11,7 +11,6 @@ use utility;
  */
 class Controller
 {
-
     /** @var View An instance of the core view class. */
     protected $View = null;
 
