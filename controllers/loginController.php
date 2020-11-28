@@ -1,21 +1,19 @@
 <?php
+require_once '../controllers/UserController.php';
 
 if (isset($_POST["submit"])) {
 
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
 
-    require_once '../models/Database.php';
-    require_once '../models/functions.php';
-    $connexion = Database::getInstance();
-
-    if (emptyInputLogin($email, $pwd)) {
-        header('location: ../public/login.php?error=emptyInput');
+    $user = new UserController();
+    if ($user->emptyInputLogin($email, $pwd)) {
+        header('location: login?error=emptyInput');
         exit();
     }
 
-    loginUser($connexion, $email, $pwd);
+    $user->loginUser($email, $pwd);
 } else {
-    header('location: ../public/login.php?error=notWorking');
+    header('location: login?error=notWorking');
     exit();
 }

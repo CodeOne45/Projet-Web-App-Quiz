@@ -1,9 +1,7 @@
 <?php
 
-// 
-if (strpos($_SERVER['REQUEST_URI'], '.') !== false) {
-	return false;
-	exit;
+if (strpos($_SERVER['REQUEST_URI'], '.') !== false) { //TODO Not Work :(
+    return false;
+    exit;
 }
-
-require_once('../myRouter.php');
+require_once('../router.php');

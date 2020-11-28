@@ -1,16 +1,16 @@
-<?php
-include_once '../views/header.php';
-include_once '../controllers/QuizController.php';
-?>
+<?php showView("header"); ?>
+
 <h2>Quiz List Page</h2>
 <div id="search_bar">
     <h3>======== Search bar ======== </h3>
-    <form action="quiz.php" method="get">
+    <form action="/quiz" method="get">
         <input type="text" name="search" placeholder="Search Quiz...">
         <button type="submit">Search</button>
     </form>
 </div>
+
 <?php
+showController("QuizController"); //TODO line 12-16 to optimize
 $filter = isset($_GET['search']) ? $_GET['search'] : null;
 $quizControl = new QuizController($filter);
 $allQuiz = $quizControl->getAllQuizs();
@@ -29,10 +29,8 @@ if (count($allQuiz) == 0) {
                 <p>Number of question : <?= $quiz['nbQuestion'] ?></p>
                 <p>Theme(s) : <?= $quiz['themes'] ?></p>
             </article>
-            <button type="button" onclick="location.href='game.php'">Create Game</button>
+            <button type="button" onclick="location.href='game'">Create Game</button>
         </div>
 <?php endforeach;
 } ?>
-<?php
-include_once '../views/footer.php';
-?>
+<?php showView("footer"); ?>

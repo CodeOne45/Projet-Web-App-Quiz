@@ -1,4 +1,5 @@
 <?php
+require_once '../controllers/UserController.php';
 
 if (isset($_POST["submit"])) {
 
@@ -6,26 +7,20 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
 
-    require_once '../models/Database.php';
-    require_once '../models/functions.php';
-    $connexion = Database::getInstance();
+    $user = new UserController();
 
-    if (emptyInputSignUp($username, $email, $pwd) !== false) {
-        header('location: ../public/register.php?error=emptyInput');
+    if ($user->emptyInputSignUp($username, $email, $pwd) !== false) {
+        header('location: register?error=emptyInput');
         exit();
     }
 
-    if (invalidEmail($email) !== false) {
-        header('location: ../public/register.php?error=invalidEmail');
+    if ($user->invalidEmail($email) !== false) {
+        header('location: register?error=invalidEmail');
         exit();
     }
 
-    if (uidExists($connexion, $email) !== false) {
-        header('location: ../public/register.php?error=usernameTaken');
-        exit();
-    }
-
-    createUser($connexion, $username, $email, $pwd);
+    $user->registerUser($username, $email, $pwd);
 } else {
-    header('location: ../public/register.php');
+    header('location: register?error=notWorking');
+    exit();
 }

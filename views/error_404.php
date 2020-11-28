@@ -1,4 +1,4 @@
-<?php afficherVue("header"); ?>
+<?php showView("header"); ?>
 
 <div class="page-wrap d-flex flex-row align-items-center">
     <div class="container">
@@ -12,5 +12,6 @@
     </div>
 </div>
 
+<?php showView("footer"); ?>
 
-<?php afficherVue("footer"); ?>
+<?php print_r($_SERVER); ?>

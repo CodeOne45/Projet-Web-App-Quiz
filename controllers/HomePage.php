@@ -1,7 +1,5 @@
 <?php
 
-use model;
-
 /**
  * Index Controller :
  * 

@@ -1,10 +1,6 @@
-<?php
-include_once '../views/header.php';
-?>
-
+<?php showView("header"); ?>
 
 <body><center>
-    
 
 <h2>Game</h2>
 <div id="search_bar"> <!-- TODO : Relier à la db -->
@@ -21,14 +17,12 @@ include_once '../views/header.php';
 
 <div>
 <article class="game_box">
-    <img src="../views/Images/HarryPotter.jpg" alt="Photo de harry potter">
+    <img src="../public/Images/HarryPotter.jpg" alt="Photo de harry potter">
     <div class="quiz_question">
        <p>Bla bla bla ?</p>
     </div>
 </article>
 </div>
-
-
 
 <div class ="answer_box">
 <table>
@@ -45,8 +39,6 @@ include_once '../views/header.php';
     <button type="button" onclick="location.href='quiz'">Quitter le jeu</button>
 </div>
 
-
-   
 </center></body>
 
     <div classe ="identifiant" style="width: 100px;  padding-top:10px; padding-bottom:10px;border: 3px solid Black; text-align: center;background: white;"> <right>
@@ -115,7 +107,7 @@ function chronoStop(){
 	document.chronoForm.reset.onclick = chronoStopReset
 	clearTimeout(timerID)
 }
-//-->
+
 </script>
 <form name="chronoForm" style = "padding-left : 80% ; margin-top: 10%;" >
   <input type="text" name="chronotime" id="chronotime" value="00:00"/>
@@ -123,11 +115,4 @@ function chronoStop(){
     <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
 </form>
 
-
-
-
-
-
-<?php
-include_once '../views/footer.php';
-?>
+<?php showView("footer"); ?>

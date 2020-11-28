@@ -1,9 +1,5 @@
-</body>
+<?php showView("header"); ?>
 
+<h1>PAGE SETTING</h1>
 
-<footer class="container fixed-bottom">
-  <hr>
-  <p>&copy; Quiz App Projet 2020 - 2021 </p>
-</footer>
-
-</html>
+<?php showView("footer"); ?>

@@ -1,10 +1,8 @@
-<?php
-include_once '../views/header.php';
-?>
+<?php showView("header"); ?>
 
 <section>
     <div class="container">
-        <form action="../controllers/registerController.php" method="post">
+        <form action="/process_register" method="post">
             <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -28,18 +26,20 @@ include_once '../views/header.php';
 
     <?php
     if (isset($_GET["error"])) {
-        if ($_GET["error"] == "emptyInput") {
-            echo "<p> Please, fill in all the information</p>";
-        } else if ($_GET["error"] == "invalidEmail") {
-            echo "<p> Email already exists !</p>";
-        } else if ($_GET["error"] == "stsmFailed") {
-            echo "<p> Error ! mais jsp d'ou ça vient :(</p>";
-        } else if ($_GET["error"] == "none") {
-            echo "<p> Congrats, your account has been created :) </p>";
+        switch ($_GET["error"]) {
+            case "emptyInput":
+                echo "<p> Please, fill in all the information</p>"; break;
+            case "invalidEmail":
+                echo "<p> Invalide format for the mail !</p>"; break;
+            case "emailAlreadyUsed":
+                echo "<p> Email already exists !</p>"; break;
+            case "stsmFailed":
+                echo "<p> Error ! mais jsp d'ou ça vient :( </p>"; break; //TODO Moyen comme explication
+            case "none": 
+                echo "<p> Congrats, your account has been created :) </p>";
         }
     }
     ?>
 </section>
-<?php
-include_once '../views/footer.php';
-?>
+
+<?php showView("footer"); ?>

@@ -1,12 +1,11 @@
 <?php
-include_once '../views/header.php';
-//include data.inc.php --> to test
-if (isset($message)) {
+showView("header");
+if (isset($message)) { //TODO ???
     echo '<label class="text-danger">.$message.</label>';
 }
 ?>
 <div class="container">
-    <form action="../controllers/UserController.php" method="post">
+    <form action="/process_login" method="post">
         <div class="form-group">
             <label for="name">Email</label>
             <input type="text" class="form-control" name="email" placeholder="Email">
@@ -24,16 +23,20 @@ if (isset($message)) {
 
 <?php
 if (isset($_GET["error"])) {
-    if (isset($_GET["error"]) == "emptyInput") {
-        ///echo "<p> Please, fill in all the information</p>";
-        echo '<script language="javascript">';
-        echo 'alert("Please, fill in all the information")';
-        echo '</script>';
+    switch($_GET["error"]) {
+        case "emptyInput": 
+            echo '<script language="javascript">';
+            echo 'alert("Please, fill in all the information")';
+            echo '</script>';
+            break;
+        case "wrongLogin":
+            echo "Your login is unknown from our database.";
+            break;
+        case "wrongPwd":
+            echo "Wrong Password";
     }
+
 }
 
 ?>
-
-<?php
-include_once '../views/footer.php';
-?>
+<?php showView("footer"); ?>

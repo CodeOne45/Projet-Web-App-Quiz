@@ -11,7 +11,6 @@ class Users
         $row = $results->fetch_assoc(); //list
 
         $results->free();
-        $stmt->close();
 
         if ($row === NULL) {
             return false;
@@ -22,6 +21,9 @@ class Users
 
     protected function setUser($username, $email, $pwd)
     {
+        if($this->getUser($email) !== false)
+            return false;
+
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user (username,email,pwd) VALUES ('$username','$email','$hashedPwd');"; //TODO use bind
         $stmt = Database::getInstance();
@@ -30,13 +32,7 @@ class Users
             return true;
         } else {
             echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
+            return false;
         }
-
-        $stmt->close();
-    }
-
-    protected function emptyInputLogin($email, $pwd) //Not useful
-    {
-        return empty($email) || empty($pwd);
     }
 }
