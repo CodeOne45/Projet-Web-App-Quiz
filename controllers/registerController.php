@@ -1,5 +1,5 @@
 <?php
-require_once '../controllers/UserController.php';
+require_once 'UserController.php';
 
 if (isset($_POST["submit"])) {
 

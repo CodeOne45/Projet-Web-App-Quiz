@@ -21,8 +21,6 @@ class Users
 
     protected function setUser($username, $email, $pwd)
     {
-        if($this->getUser($email) !== false)
-            return false;
 
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user (username,email,pwd) VALUES ('$username','$email','$hashedPwd');"; //TODO use bind

@@ -17,7 +17,7 @@
 
 <div>
 <article class="game_box">
-    <img src="../public/Images/HarryPotter.jpg" alt="Photo de harry potter">
+    <img src="public/Images/HarryPotter.jpg" alt="Photo de harry potter">
     <div class="quiz_question">
        <p>Bla bla bla ?</p>
     </div>

@@ -15,5 +15,5 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ public/index.php [L]
 
-    ErrorDocument 404 error_404.php
+    ErrorDocument 404 views/error_404.php
 </IfModule>

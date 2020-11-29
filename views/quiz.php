@@ -3,7 +3,7 @@
 <h2>Quiz List Page</h2>
 <div id="search_bar">
     <h3>======== Search bar ======== </h3>
-    <form action="/quiz" method="get">
+    <form action="quiz" method="get">
         <input type="text" name="search" placeholder="Search Quiz...">
         <button type="submit">Search</button>
     </form>

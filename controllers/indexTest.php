@@ -1,5 +1,5 @@
 <?php
-include_once '../controllers/UserController.php';
+include_once 'UserController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

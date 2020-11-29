@@ -2,7 +2,7 @@
 
 <section>
     <div class="container">
-        <form action="/process_register" method="post">
+        <form action="process_register" method="post">
             <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -33,8 +33,8 @@
                 echo "<p> Invalide format for the mail !</p>"; break;
             case "emailAlreadyUsed":
                 echo "<p> Email already exists !</p>"; break;
-            case "stsmFailed":
-                echo "<p> Error ! mais jsp d'ou ça vient :( </p>"; break; //TODO Moyen comme explication
+            case "stmtFailed":
+                echo "<p> Username already used </p>"; break; //TODO Moyen comme explication
             case "none": 
                 echo "<p> Congrats, your account has been created :) </p>";
         }

@@ -5,10 +5,10 @@ if (isset($message)) { //TODO ???
 }
 ?>
 <div class="container">
-    <form action="/process_login" method="post">
+    <form action="process_login" method="post">
         <div class="form-group">
             <label for="name">Email</label>
-            <input type="text" class="form-control" name="email" placeholder="Email">
+            <input type="text" class="form-control" aria-describedby="emailHelp" name="email" placeholder="Email">
         </div>
 
         <div class="form-group">
@@ -17,7 +17,7 @@ if (isset($message)) { //TODO ???
         </div>
         <button type="submit" class="btn btn-primary" name="submit">Login</button>
 
-        <a href="register.php">Register now</a>
+        <a href="register">Register now</a>
     </form>
 </div>
 
