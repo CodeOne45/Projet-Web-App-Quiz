@@ -29,7 +29,10 @@ if (count($allQuiz) == 0) {
                 <p>Number of question : <?= $quiz['nbQuestion'] ?></p>
                 <p>Theme(s) : <?= $quiz['themes'] ?></p>
             </article>
-            <button type="button" onclick="location.href='game'">Create Game</button>
+            <form action="lobby" method="get">
+                <input type="hidden" name="id_quiz" value=<?= $quiz['id_quiz'] ?>>
+                <button type="submit">Create Game</button>
+            </form>
         </div>
 <?php endforeach;
 } ?>

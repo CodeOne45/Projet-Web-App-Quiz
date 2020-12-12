@@ -13,5 +13,3 @@
 </div>
 
 <?php showView("footer"); ?>
-
-<?php print_r($_SERVER); ?>
