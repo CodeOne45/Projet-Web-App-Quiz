@@ -20,8 +20,10 @@ $allowedPages = [
     "quiz" => "view:quiz",
     "game" => "view:game",
     "lobby" => "view:lobby",
+    "visitor" => "view:visitor",
     "process_login" => "controller:loginController",
     "process_logout" => "controller:logoutController",
+    "process_Multyplayer" => "controller:PlayerController",
     "process_register" => "controller:registerController"
 ];
 

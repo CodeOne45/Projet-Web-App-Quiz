@@ -30,10 +30,10 @@ class UserController extends Users
 
     public function registerUser($username, $email, $pwd)
     {
-        if($this->getUser($email) !== false){
+        if ($this->getUser($email) !== false) {
             header('location: register?error=emailAlreadyUsed');
             exit();
-        }elseif ($this->setUser($username, $email, $pwd) === true) {
+        } elseif ($this->setUser($username, $email, $pwd) === true) {
             header('location: register?error=none');
             exit();
         } else {
@@ -42,7 +42,8 @@ class UserController extends Users
         }
     }
 
-    public function updateUser(){
+    public function updateUser()
+    {
         //TODO
     }
 

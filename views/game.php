@@ -1,47 +1,55 @@
 <?php showView("header"); ?>
 
 <body>
-    <center>
+    <?php
+    $lobbyId = $_GET["id_lobby"];
 
-        <h2>Game</h2>
-        <div id="search_bar">
-            <!-- TODO : Relier à la db -->
-            <form action="quiz.php" method="get">
-                <input type="text" name="search" placeholder="Search Quiz...">
-                <button type="submit">Search</button>
-            </form>
-            <br>
-        </div>
+    if (!$lobbyId) {
+        echo "<h1>Quiz room id : " . $_GET["id_lobby"] . "</h1>";
+    } else {
+    ?>
+        <center>
 
-        <div id="Question" class="numerodelaquestion" style="padding-left : 85%; ">
-            2/4
-        </div>
+            <h2>Game</h2>
+            <div id="search_bar">
+                <!-- TODO : Relier à la db -->
+                <form action="quiz.php" method="get">
+                    <input type="text" name="search" placeholder="Search Quiz...">
+                    <button type="submit">Search</button>
+                </form>
+                <br>
+            </div>
 
-        <div>
-            <article class="game_box">
-                <img src="public/Images/HarryPotter.jpg" alt="Photo de harry potter">
-                <div class="quiz_question">
-                    <p>Bla bla bla ?</p>
-                </div>
-            </article>
-        </div>
+            <div id="Question" class="numerodelaquestion" style="padding-left : 85%; ">
+                2/4
+            </div>
 
-        <div class="answer_box">
-            <table>
-                <tr>
-                    <th><a href="game">Reponse 1</a></th>
-                    <th><a href="game">Reponse 2</a></th>
-                </tr>
-                <tr>
-                    <th><a href="game">Reponse 3</a></th>
-                    <th><a href="game">Reponse 4</a></th>
-                </tr>
-            </table>
-            <br>
-            <button type="button" onclick="location.href='quiz'">Quitter le jeu</button>
-        </div>
+            <div>
+                <article class="game_box">
+                    <img src="public/Images/HarryPotter.jpg" alt="Photo de harry potter">
+                    <div class="quiz_question">
+                        <p>Bla bla bla ?</p>
+                    </div>
+                </article>
+            </div>
 
-    </center>
+            <div class="answer_box">
+                <table>
+                    <tr>
+                        <th><a href="game">Reponse 1</a></th>
+                        <th><a href="game">Reponse 2</a></th>
+                    </tr>
+                    <tr>
+                        <th><a href="game">Reponse 3</a></th>
+                        <th><a href="game">Reponse 4</a></th>
+                    </tr>
+                </table>
+                <br>
+                <button type="button" onclick="location.href='quiz'">Quitter le jeu</button>
+            </div>
+
+
+        </center>
 </body>
 
 <div classe="identifiant" style="width: 100px;  padding-top:10px; padding-bottom:10px;border: 3px solid Black; text-align: center;background: white;">
@@ -123,5 +131,11 @@
     <input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
     <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
 </form>
+<?php
+    }
+?>
+
+
+
 
 <?php showView("footer"); ?>
