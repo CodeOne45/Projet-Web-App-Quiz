@@ -44,8 +44,28 @@ class UserController extends Users
 
     public function updateUser()
     {
-        //TODO
-    }
+        $requser = $phpprojectbd->prepare("SELECT * FROM user WHERE id = ?");
+        $requser->execute(array($_SESSION['id']));
+        $user = $requser->fetch();
+        if(isset($_POST['newusername']) AND !empty($_POST['newusername']) AND $_POST['newusername'] != $user['username']) {
+           $newusername = htmlspecialchars($_POST['newusername']);
+           $insertusername = $bphpprojectbd->prepare("UPDATE user SET username = ? WHERE id = ?");
+           $insertusername->execute(array($newusername, $_SESSION['id']));
+           header('Location: settings.php?id='.$_SESSION['id']);
+        }
+        if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email']) {
+           $newemail = htmlspecialchars($_POST['newemail']);
+           $insertemail = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
+           $insertemail->execute(array($newemail, $_SESSION['id']));
+           header('Location: settings.php?id='.$_SESSION['id']);
+        }
+        if(isset($_POST['newpwd']) AND !empty($_POST['newpwd']) AND $_POST['newpwd'] != $user['pwd']) {
+            $newpwd = htmlspecialchars($_POST['newpwd']);
+            $insertpwd = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
+            $insertpwed->execute(array($newpwd, $_SESSION['id']));
+            header('Location: settings.php?id='.$_SESSION['id']);
+         }
+        }
 
     public function emptyInputLogin($email, $pwd)
     {

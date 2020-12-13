@@ -1,7 +1,12 @@
 #--Création de Quiz--
 INSERT INTO quiz (name, description) VALUE('Harry Potter','Blabla'); #1
 INSERT INTO quiz (name, description) VALUE('Dessin Animée','Blibli'); #2
-INSERT INTO quiz (name, description) VALUE('Séries américaines','Bloblo'); #3
+INSERT INTO quiz (name, description) VALUE('Séries Américaines','Bloblo'); #3
+INSERT INTO quiz (name, description) VALUE('Héros Marvel','Bleble'); #4
+INSERT INTO quiz (name, description) VALUE('Héros de Star Wars','Blublu'); #5
+
+
+
 
 #--Harry Poter : questions 1--
 INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
@@ -41,3 +46,29 @@ INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, 
 INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
     VALUE (3,2,'Combien de saisons compte la série télévisée « Community » créée par Dan Harmon',
            'Série','6','7','8','5','1');
+
+#--Héros Marvel : questions 1--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?',
+       'Héros Marvel','Superman','Spider-Man','Batman','Hulk','1');
+#--Héros Marvel : questions 2--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Dans les X-Men, quelle substance constitue le squelette principal de Wolverine ?',
+       'Héros Marvel','Adamantium','Vibranium','Cavorite','Neutronium','1');
+#--Héros Marvel : questions 3--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Quel est le nom de Spider-Man, apparu pour la première fois en 1962 ?',
+       'Héros Marvel', 'Peter Parker','John Parker','Tom Parker',' Alan Parker','1');
+
+#--Héros de Star Wars : questions 1--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Quel est le nom du vaisseau spatial du contrebandier Han Solo ?',
+       'Héros de Star Wars','Faucon Millenium','Aigle Solitaire','B-Wing','Speeder','1');
+#--Héros de Star Wars : questions 2--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Quel métier est exercé par Jango Fett, humain originaire de Concord Dawn ?',
+       'Héros de Star Wars','Chasseur de primes','Sénateur','Vendeur de droïdes','Musicien','1');
+#--Héros de Star Wars : questions 3--
+INSERT INTO question (id_quiz, level, text, themes, prop1, prop2, prop3, prop4, answer)
+VALUE (1,1,'Quel est le lien de parenté entre Luke Skywalker et la Princesse Leia ?',
+       'Héros de Star Wars', 'Frère et soeur','Cousin et cousine','Oncle et tante',' Mari et femme','1');
