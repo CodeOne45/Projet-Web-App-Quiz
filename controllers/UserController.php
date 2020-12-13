@@ -23,6 +23,8 @@ class UserController extends Users
 
         $_SESSION["userId"] = $results["id_user"];
         $_SESSION["userName"] = $results["username"];
+        $_SESSION["userMail"] = $results["email"];
+
 
         header('location: index');
         exit();

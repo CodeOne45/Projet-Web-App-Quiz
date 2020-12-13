@@ -18,7 +18,7 @@ if (count($allQuiz) == 0) {
 } else {
 
     foreach ($allQuiz as $quiz) : ?>
-        <div class="row">
+        <div class="row" style="display:inline-block">
             <div class="col-sm-6">
                 <div class="card" style="width: 18rem;">
         
