@@ -32,6 +32,20 @@ class Lobby
         }
     }
 
+
+    public  function startGame($id_lobby)
+    {
+        $sql = "UPDATE `game` SET `start` = '1' WHERE `game`.`id_game` = '$id_lobby';"; //TODO use bind
+        $stmt = Database::getInstance();
+
+        if ($stmt->query($sql) === TRUE) {
+            return true;
+        } else {
+            echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
+            return false;
+        }
+    }
+
     public  function getLobby($id_lobby)
     {
         $sql = "SELECT * FROM game WHERE id_game = '$id_lobby';";
@@ -62,9 +76,9 @@ class Lobby
         }
     }
 
-    public function addPlayer($id_lobby, $id_user, $nickname)
+    public function addPlayer($id_lobby, $nickname)
     {
-        $sql = "INSERT INTO `player` (`id_game`, `id_user`, `nickname`, `score`) VALUES ('$id_lobby', '$id_user', '$nickname','0');"; //TODO use bind
+        $sql = "INSERT INTO `player` (`id_game`, `nickname`, `score`) VALUES ('$id_lobby', '$nickname','0');"; //TODO use bind
         $stmt = Database::getInstance();
 
         if ($stmt->query($sql) === TRUE) {
@@ -81,17 +95,10 @@ class Lobby
         $stmt = Database::getInstance();
 
         $results = $stmt->query($sql);
-        $row = $results->fetch_assoc(); //list
-
-        if ($row === NULL) {
-            return false;
-        }
 
         $allPlayers = [];
-        $compteur = 0;
         while ($row = $results->fetch_assoc()) {
-            $allPlayers[$compteur]['nickname'] = $row["nickname"];
-            $compteur += 1;
+            $allPlayers[] = $row;
         }
         $results->free();
         return $allPlayers;

@@ -3,8 +3,12 @@
 <body>
     <?php
     $lobbyId = $_GET["id_lobby"];
+    showController("LobbyController");
+    $lobby = new LobbyController();
 
-    if (!$lobbyId) {
+    if ($lobby->get_lobby($lobbyId)) {
+
+        $lobby->launch_game($lobbyId);
         echo "<h1>Quiz room id : " . $_GET["id_lobby"] . "</h1>";
     } else {
     ?>
@@ -182,16 +186,10 @@
         clearTimeout(timerID)
     }
 </script>
-<<<<<<< HEAD <form name="chronoForm" style="padding-left : 80% ; margin-top: 10%;">
-    <input type="text" name="chronotime" id="chronotime" value="00:00" />
-    <input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
-    <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
-    </form>
+<input type="text" name="chronotime" id="chronotime" value="00:00" />
+<input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
+<input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
+</form>
 <?php
     }
 ?>
-
-
-
-=======
->>>>>>> 20318f739c49c67d317d87ef668c11e400e894bb

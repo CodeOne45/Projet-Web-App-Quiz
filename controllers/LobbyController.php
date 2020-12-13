@@ -25,6 +25,11 @@ class LobbyController
         $this->lobby->setGame($id_lobby, $QuizID);
     }
 
+    public function launch_game($id_lobby)
+    {
+        $this->lobby->startGame($id_lobby);
+    }
+
     public function delete_lobby($id_lobby)
     {
         $this->lobby->deleteLobby($id_lobby);
@@ -41,8 +46,8 @@ class LobbyController
         return $results;
     }
 
-    public function join_lobby($id_lobby, $id_user, $nickname)
+    public function join_lobby($id_lobby, $nickname)
     {
-        $this->lobby->addPlayer($id_lobby, $id_user, $nickname);
+        $this->lobby->addPlayer($id_lobby,  $nickname);
     }
 }

@@ -82,22 +82,20 @@
                             )
                         }
                     </script>
-
                     </div>
+
+
             </div>
-
-
         </div>
-    </div>
-    <script>
-        function copyJS() {
-            var copyText = document.getElementById("lobby_id_cp");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            alert("Copied the text: " + copyText.value);
-        }
-    </script>
+        <script>
+            function copyJS() {
+                var copyText = document.getElementById("lobby_id_cp");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                alert("Copied the text: " + copyText.value);
+            }
+        </script>
 
 </main>
 
