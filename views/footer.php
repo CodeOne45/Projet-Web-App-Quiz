@@ -1,6 +1,6 @@
     </body>
 
-    <footer class="container fixed-bottom">
+    <footer class="container-fluid bottom">
       <hr>
       <p>&copy; Quiz App Projet 2020 - 2021 </p>
     </footer>
