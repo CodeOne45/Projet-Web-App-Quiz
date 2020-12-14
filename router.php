@@ -21,10 +21,12 @@ $allowedPages = [
     "game" => "view:game",
     "lobby" => "view:lobby",
     "visitor" => "view:visitor",
+    "score"=> "view:score",
     "process_login" => "controller:loginController",
     "process_logout" => "controller:logoutController",
-    "process_Multyplayer" => "controller:PlayerController",
-    "process_register" => "controller:registerController"
+    "process_multyplayer" => "controller:multiplayerController",
+    "process_register" => "controller:registerController",
+    "process_game" => "controller:setGameController"
 ];
 
 function showView($view)

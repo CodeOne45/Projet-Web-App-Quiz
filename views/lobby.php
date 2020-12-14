@@ -15,11 +15,17 @@
                         $lobby->delete_lobby($_SESSION["lobby_Id"]);
                     }
 
+                    if(isset($_GET["id_quiz"]) == false){
+                        echo "Lobby not set";
+                        exit;
+                    }
+
                     $quizId = $_GET["id_quiz"];
                     $lobby_ID = $lobby->set_Lobby_ID();
                     $_SESSION["lobby_Id"] = $lobby_ID;
 
-                    $lobby->creat_lobby($lobby_ID, $quizId);
+                    $lobby->create_lobby($lobby_ID, $quizId);
+                    $lobby->join_lobby($lobby_ID, $_SESSION['userName'], $_SESSION['userId']);
                 ?>
                     <div class="col-sm">
                         Quiz informations
@@ -27,7 +33,7 @@
                     <div class="col-sm">
                         Single Player
 
-                        <form action="game" method="get">
+                        <form action="process_game" method="get">
                             <input type="hidden" name="id_lobby" value=<?= $lobby_ID ?>>
                             <button class="btn btn-primary btn-sm mr" type="submit"> Launch Single Player</button>
                         </form>
@@ -40,9 +46,9 @@
                         echo '<input type="text" class="form-control" value="http://localhost/Projet-Web-App-Quiz/visitor?id_lobby='  . $lobby_ID . '" readonly="readonly" id="lobby_id_cp">';
                         ?>
                         <button class="btn btn-primary btn-sm mr" onclick="copyJS()"> Copy URL</button>
-                        <form action="game" method="get">
+                        <form action="process_game" method="get">
                             <input type="hidden" name="id_lobby" value=<?= $lobby_ID ?>>
-                            <button class="btn btn-primary btn-sm mr" type="submit"> Launch Multyplayer</button>
+                            <button class="btn btn-primary btn-sm mr" type="submit"> Launch Multiplayer</button>
                         </form>
 
                         List of players :
@@ -56,13 +62,15 @@
                         //Donothing
                     } else {
                         $nickname =  $_GET["nickname"];
-                        $lobby->join_lobby($lobbyId, 1, $nickname);
+                        $lobby->join_lobby($lobbyId, $nickname);
+                        if(isset($_SESSION['userId']) == false)
+                            $_SESSION['userId'] = "visitor"; //TODO It's ded
                     }
                     echo 'Joined the lobby, ';
                     echo 'Waiting admin to launch the quiz! ';
                     echo 'List of players';
                 } else {
-                    echo 'Please login and chose a quiz to creat a lobby !';
+                    echo 'Please login and chose a quiz to create a lobby !';
                 }
                     ?>
                     <div class="container">
@@ -73,7 +81,7 @@
                         setInterval(runFunction, 1000);
 
                         function runFunction() {
-                            $.get("process_Multyplayer", {
+                            $.get("process_multyplayer", {
                                     lobby: '<?php echo $lobbyId ?>'
                                 },
                                 function(data, status) {
@@ -83,8 +91,6 @@
                         }
                     </script>
                     </div>
-
-
             </div>
         </div>
         <script>

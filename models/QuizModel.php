@@ -7,7 +7,6 @@ class QuizModel { //a changer, pas d'extends
         if(empty($filter))
             $sql = 'SELECT * FROM quiz';
         else{
-//            $sql = "SELECT * FROM quiz WHERE name='$filter'";
             $sql = "SELECT * FROM quiz WHERE name=?";
         }
         //==========================================
@@ -24,13 +23,6 @@ class QuizModel { //a changer, pas d'extends
             error_log("Error in query : " . $sql. "\n");
             exit(); //TODO better to throw a error
         }
-        //==========================================
-//        $results = $mysqli->query($sql);
-//        if(!$results){
-//            error_log("Error in query : " . $sql);
-//            exit(); //TODO better to throw a error
-//        }
-        //==========================================
 
         $allQuiz = [];
         $compteur = 0;
@@ -45,8 +37,29 @@ class QuizModel { //a changer, pas d'extends
         return $allQuiz;
     }
 
+    public function getQuiz(string $id){
+        $mysqli = Database::getInstance();
+        $sql = "SELECT * FROM quiz WHERE id_quiz=?";
+        //==========================================
+        $stmt = $mysqli->stmt_init();
+        if(!$stmt->prepare($sql)){
+            error_log("Fail during preparation of statement\n");
+            exit(); //TODO better to throw a error
+        }
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        if(!$results){
+            error_log("Error in query : " . $sql. "\n");
+            exit(); //TODO better to throw a error
+        }
+        $row = $results->fetch_assoc();
+        $results->free();
+        return $row;
+    }
+
     public function getAllQuestions(int $quizId){ //Retourne tous les questions d'un quiz
-        $stmt = Database::getInstance();   //TODO redondance
+        $stmt = Database::getInstance();
         $sql = "SELECT * FROM question WHERE id_quiz = $quizId";
         $results = $stmt->query($sql);
         if(!$results){
@@ -63,6 +76,26 @@ class QuizModel { //a changer, pas d'extends
 
     public function getNbQuestion(int $quizId){ //Retourne le nombre de questions d'un quiz
         return count($allQuestions = $this->getAllQuestions($quizId));
+    }
+
+    public function getAllAnswerQuest(int $questionId){
+        $mysqli = Database::getInstance();
+        $sql = "SELECT goodAnswer, badAnswer, badAnswer2, badAnswer3 FROM question WHERE id_question=?";
+        $stmt = $mysqli->stmt_init();
+        if(!$stmt->prepare($sql)){
+            error_log("Fail during preparation of statement\n");
+            exit(); //TODO better to throw a error
+        }
+        $stmt->bind_param("i", $questionId);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        if(!$results){
+            error_log("Error in query : " . $sql. "\n");
+            exit(); //TODO better to throw a error
+        }
+        $row = $results->fetch_assoc();
+        $results->free();
+        return $row;
     }
 
     public function getAllThemes(int $quizId) : string{

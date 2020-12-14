@@ -25,19 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `answer_player`
---
-
-DROP TABLE IF EXISTS `answer_player`;
-CREATE TABLE `answer_player` (
-  `id_player` int(10) NOT NULL,
-  `id_question` int(10) NOT NULL,
-  `answer` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `game`
 --
 
@@ -45,7 +32,8 @@ DROP TABLE IF EXISTS `game`;
 CREATE TABLE `game` (
   `id_game` int(10) NOT NULL,
   `id_quiz` int(10) NOT NULL,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `start` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,7 +46,7 @@ DROP TABLE IF EXISTS `player`;
 CREATE TABLE `player` (
   `id_player` int(10) NOT NULL,
   `id_game` int(10) NOT NULL,
-  `id_user` int(10) NOT NULL,
+  `id_user` int(10) DEFAULT NULL,
   `nickname` varchar(20) NOT NULL,
   `score` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -77,11 +65,10 @@ CREATE TABLE `question` (
   `text` text NOT NULL,
   `imageURL` text,
   `themes` text NOT NULL,
-  `prop1` varchar(64) NOT NULL,
-  `prop2` varchar(64) NOT NULL,
-  `prop3` varchar(64) DEFAULT NULL,
-  `prop4` varchar(64) DEFAULT NULL,
-  `answer` binary(1) NOT NULL
+  `goodAnswer` varchar(64) NOT NULL,
+  `badAnswer` varchar(64) NOT NULL,
+  `badAnswer2` varchar(64) DEFAULT NULL,
+  `badAnswer3` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -114,14 +101,6 @@ CREATE TABLE `user` (
 --
 -- Index pour les tables déchargées
 --
-
---
--- Index pour la table `answer_player`
---
-ALTER TABLE `answer_player`
-  ADD PRIMARY KEY (`id_player`,`id_question`),
-  ADD KEY `FK_id_question` (`id_question`),
-  ADD KEY `Fk_id_player` (`id_player`);
 
 --
 -- Index pour la table `game`
@@ -191,13 +170,6 @@ ALTER TABLE `user`
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `answer_player`
---
-ALTER TABLE `answer_player`
-  ADD CONSTRAINT `FK_id_player` FOREIGN KEY (`id_player`) REFERENCES `player` (`id_player`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_id_question` FOREIGN KEY (`id_question`) REFERENCES `question` (`id_question`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `game`

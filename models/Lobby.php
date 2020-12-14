@@ -3,10 +3,7 @@ require_once '../models/Database.php';
 
 class Lobby
 {
-    public function random_ID(
-        int $length = 64,
-        string $keyspace = '0123456789'
-    ): string {
+    public function random_ID(int $length = 64, string $keyspace = '0123456789'): string {
         if ($length < 1) {
             throw new \RangeException("Length must be a positive integer");
         }
@@ -19,7 +16,7 @@ class Lobby
         return implode('', $pieces);
     }
 
-    public  function setGame($ID, $QuizID)
+    public function setGame($ID, $QuizID)
     {
         $sql = "INSERT INTO `game` (`id_game`, `id_quiz`, `date`, `start`) VALUES ('$ID', '$QuizID', current_timestamp(), '0');"; //TODO use bind
         $stmt = Database::getInstance();
@@ -31,7 +28,6 @@ class Lobby
             return false;
         }
     }
-
 
     public  function startGame($id_lobby)
     {
@@ -76,20 +72,23 @@ class Lobby
         }
     }
 
-    public function addPlayer($id_lobby, $nickname)
+    public function addPlayer($id_lobby, $nickname, ?int $id_user = NULL)
     {
-        $sql = "INSERT INTO `player` (`id_game`, `nickname`, `score`) VALUES ('$id_lobby', '$nickname','0');"; //TODO use bind
+        if($id_user !== NULL)
+            $sql = "INSERT INTO `player` (`id_game`, `nickname`, `id_user`, `score`) VALUES ('$id_lobby', '$nickname', '$id_user', '0');"; //TODO use bind
+        else
+            $sql = "INSERT INTO `player` (`id_game`, `nickname`, `score`) VALUES ('$id_lobby', '$nickname','0');"; //TODO use bind
         $stmt = Database::getInstance();
 
         if ($stmt->query($sql) === TRUE) {
             return true;
         } else {
-            echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
+            error_log("Error: " . $sql . "<br>" . $stmt->error);
             return false;
         }
     }
 
-    public  function getPlayer($id_lobby)
+    public  function getPlayers($id_lobby)
     {
         $sql = "SELECT * FROM player WHERE id_game = '$id_lobby';";
         $stmt = Database::getInstance();
@@ -102,5 +101,31 @@ class Lobby
         }
         $results->free();
         return $allPlayers;
+    }
+
+    public  function getIdPlayer($id_lobby, $id_user) //work only for admin player
+    {
+        $sql = "SELECT * FROM player WHERE id_game = '$id_lobby' AND id_user='$id_user';";
+        $stmt = Database::getInstance();
+
+        $results = $stmt->query($sql);
+        $row = $results->fetch_assoc();
+        $results->free();
+        return $row;
+    }
+
+    public  function updatePlayer($idPlayer, $score)
+    {
+        $sql = "UPDATE `player` SET `score` = '$score' WHERE id_player='$idPlayer';";
+        $stmt = Database::getInstance();
+
+        $results = $stmt->query($sql);
+
+        if ($stmt->query($sql) === TRUE) {
+            return true;
+        } else {
+            echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
+            return false;
+        }
     }
 }

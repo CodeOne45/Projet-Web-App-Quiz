@@ -5,7 +5,6 @@ class LobbyController
 {
     private Lobby $lobby;
 
-
     function __construct()
     {
         $this->lobby = new Lobby();
@@ -20,7 +19,7 @@ class LobbyController
         return $this->lobby->getLobby($id_lobby);
     }
 
-    public function creat_lobby($id_lobby, $QuizID)
+    public function create_lobby($id_lobby, $QuizID)
     {
         $this->lobby->setGame($id_lobby, $QuizID);
     }
@@ -37,7 +36,7 @@ class LobbyController
 
     public function get_players($id_lobby)
     {
-        $results = $this->lobby->getPlayer($id_lobby);
+        $results = $this->lobby->getPlayers($id_lobby);
         if (!$results) {
             header('location: lobby?error=player_not_found');
             exit();
@@ -46,8 +45,23 @@ class LobbyController
         return $results;
     }
 
-    public function join_lobby($id_lobby, $nickname)
+    public function get_idPlayer($id_lobby, $id_user)
     {
-        $this->lobby->addPlayer($id_lobby,  $nickname);
+        $result = $this->lobby->getIdPlayer($id_lobby, $id_user);
+        if (!$result) {
+            header('location: lobby?error=player_not_found'); //TODO
+            exit();
+        }
+        return $result;
+    }
+
+    public function join_lobby($id_lobby, $nickname, ?int $id_user=NULL)
+    {
+        $this->lobby->addPlayer($id_lobby, $nickname, $id_user);
+    }
+
+    public function update_Player($idPlayer, $score)
+    {
+        $this->lobby->updatePlayer($idPlayer, $score);
     }
 }

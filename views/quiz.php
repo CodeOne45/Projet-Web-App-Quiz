@@ -16,12 +16,11 @@ $allQuiz = $quizControl->getAllQuizs();
 if (count($allQuiz) == 0) {
     echo "Not Quiz for your search ! Try another search.";
 } else {
-
     foreach ($allQuiz as $quiz) : ?>
         <div class="row" style="display:inline-block">
             <div class="col-sm-6">
                 <div class="card" style="width: 18rem;">
-        
+
                     <div class="card-body">
                         <h5 class="card-title"><?= $quiz['name'] ?></h5>
                         <p class="card-text"><?= $quiz['description'] ?></p>
@@ -41,7 +40,6 @@ if (count($allQuiz) == 0) {
                 </div>
             </div>
         </div>
-   
-<?php endforeach;
-} ?>
+
+<?php endforeach;}?>
 <?php showView("footer"); ?>

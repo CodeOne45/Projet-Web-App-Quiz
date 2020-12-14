@@ -1,131 +1,91 @@
-<?php showView("header"); ?>
+<?php 
+showController("GameController");
+showView("header");
+if(isset($_SESSION['gameSession']) == false or isset($_GET["id_lobby"]) == false){
+    echo "GAME NOT SET"; //TODO Create a game not set page
+    exit;
+}
+$lobby = new LobbyController();
+$lobby->launch_game($_GET["id_lobby"]);
+$game = $_SESSION['gameSession'];
+$currentQ = $game->getQuestions()[$game->getCurrentQNb()];
+?>
 
 <body>
-    <?php
-    $lobbyId = $_GET["id_lobby"];
-    showController("LobbyController");
-    $lobby = new LobbyController();
-
-    if ($lobby->get_lobby($lobbyId)) {
-
-        $lobby->launch_game($lobbyId);
-        echo "<h1>Quiz room id : " . $_GET["id_lobby"] . "</h1>";
-    } else {
-    ?>
-        <center>
-
-            <h2>Game</h2>
-            <div id="search_bar">
-                <!-- TODO : Relier à la db -->
-                <form action="quiz.php" method="get">
-                    <input type="text" name="search" placeholder="Search Quiz...">
-                    <button type="submit">Search</button>
-                </form>
-                <br>
-            </div>
-
-            <div id="Question" class="numerodelaquestion" style="padding-left : 85%; ">
-                2/4
-            </div>
-
-            <div>
-                <article class="game_box">
-
-
-                    <h2 class="text-center">Game</h2>
-
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="row">
-                                <aside class="col-md-12">
-                                    <form name="chronoForm">
-                                        <input type="text" name="chronotime" id="chronotime" value="00:00" />
-                                        <input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
-                                        <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
-                                    </form>
-                                </aside>
-                            </div>
-                        </div>
-
-                        <section class="col-sm-10 col-md-8">
-
-                            <div class="progress w-50">
-                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-                            <div class="game_box">
-                                <img src="public/Images/HarryPotter.jpg" alt="Photo de harry potter">
-                                <div class="quiz_question">
-                                    <p>Bla bla bla ?</p>
-                                </div>
-                </article>
-            </div>
-
-            <div class="answer_box">
-                <table>
-                    <tr>
-                        <th><a href="game">Reponse 1</a></th>
-                        <th><a href="game">Reponse 2</a></th>
-                    </tr>
-                    <tr>
-                        <th><a href="game">Reponse 3</a></th>
-                        <th><a href="game">Reponse 4</a></th>
-                    </tr>
-                </table>
-                <br>
-                <button type="button" onclick="location.href='quiz'">Quitter le jeu</button>
-            </div>
-
-
-        </center>
-        </div>
-
-        <div class="answer_box">
-            <table>
-                <tr>
-                    <th><a class="btn btn-primary btn-md mr" href="quiz" role="button">Reponse 1</a></th>
-                    <th><a class="btn btn-danger btn-md mr" href="quiz" role="button">Reponse 2</a></th>
-                </tr>
-                <tr>
-                    <th><a class="btn btn-warning btn-md mr" href="quiz" role="button">Reponse 3</a></th>
-                    <th><a class="btn btn-success btn-md mr" href="quiz" role="button">Reponse 4</a></th>
-                </tr>
-            </table>
-            <br>
-            <a class="btn btn-dark btn-lg mr" href="quiz" role="button">Quitter le jeu</a>
-        </div>
-
-
-        </section>
-
-        <div class="col-md-2">
-            <div class="row">
+        <h2 class="text-center"><?= "QUIZ : ".$game->getQuiz()['name']; ?></h2>
+        <div><?="<h4>Quiz room id : " . $_GET["id_lobby"] . "</h4>"?></div>
+        <div class="row">
+            
+            <div class="col-sm-2">
+                <div class="row">
                 <aside class="col-md-12">
+                    <form name="chronoForm">
+                        <input type="text" name="chronotime" id="chronotime" value="00:00" />
+                        <input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
+                        <input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
+                    </form>
+                </aside>
+                </div>
+            </div>
 
-                    <div class="players">
-                        <table>
-                            <tr>
-                                <th>Player 1</th>
-                            </tr>
-                            <tr>
-                                <th>Player 2</th>
-                            </tr>
+            <div class="col-sm-8">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style=<?="width:".$game->getProgress()."%"?> aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <aside>
+                    <table>
+                        <tr>
+                            <th>Player 1</th>
+                        </tr>
+                        <tr>
+                            <th>Player 2</th>
+                        </tr>
                             <th>Player 3</th>
-                            </tr>
-                        </table>
-                    </div>
+                        </tr>
+                    </table>
                 </aside>
             </div>
         </div>
-        </div>
 
+        <div class="row">
+            <div class="col-sm-1 col-md-2"></div>
 
+            <section class="col-sm-10 col-md-8">
+                <h3>
+                    <?php   $numQ = $game->getCurrentQNb()+1; 
+                            echo "Question n°".$numQ; ?>
+                </h3>
+                <div class="game_box">
+                    <img src=<?="public/images/".$currentQ["imageURL"].".jpg"?> alt="**image de harry potter**">
+                    <div class="quiz_question">
+                        <p><?=$currentQ["text"]?></p>
+                    </div>
+                </div>
 
-
+                <?php 
+                $proposalAnswer = $game->getQAnswers($currentQ["id_question"]);
+                shuffle($proposalAnswer);
+                print_r($proposalAnswer);
+                foreach($proposalAnswer as $answer):?>
+                    <form action="process_game" method="get">
+                        <input type="hidden" name="id_lobby" value="<?=$game->getLobbyId()?>">
+                        <input type="hidden" name="playerAnswer" value="<?=$answer?>">
+                        <button class="btn btn-primary btn-md mr" type="submit"><?=$answer?></button>
+                    </form>
+                <?php endforeach;?>
+                <br>
+                <form action="process_game" method="get">
+                    <button class="btn btn-dark btn-lg mr" type="submit" name="quit">Rage Quit</button>
+                </form>
+            </section>
+            
+        </div> 	
 </body>
 
 <?php showView("footer"); ?>
-
 
 <script language="JavaScript">
     var startTime = 0
@@ -186,10 +146,4 @@
         clearTimeout(timerID)
     }
 </script>
-<input type="text" name="chronotime" id="chronotime" value="00:00" />
-<input type="button" name="startstop" value="start!" onClick="chronoStart()" style="visibility: hidden;" />
-<input type="button" name="reset" value="reset!" onClick="chronoReset()" style="visibility: hidden;" />
-</form>
-<?php
-    }
-?>
+

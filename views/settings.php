@@ -12,12 +12,12 @@
 
     <div class="form-group">
         <label for="userEmail">Email</label>
-        <input type="email" class="form-control" id="userEmail" value="<?php echo $_SESSION['userMail']; ?>" required=""> 
+        <input type="email" class="form-control" id="userEmail" value="<?php echo $_SESSION['userMail']; ?>" required="">
     </div>
 
     <div class="form-group">
         <label for="newPwd">New Password</label>
-        <input type="password" class="form-control" id="newPwd" value="secret" required=""> 
+        <input type="password" class="form-control" id="newPwd" value="secret" required="">
 
 
 
@@ -35,7 +35,7 @@
         }
 
     </div>
-    
+
 </form>
 
 <?php showView("footer"); ?>
