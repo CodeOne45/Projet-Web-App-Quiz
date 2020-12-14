@@ -15,7 +15,7 @@
                         $lobby->delete_lobby($_SESSION["lobby_Id"]);
                     }
 
-                    if(isset($_GET["id_quiz"]) == false){
+                    if (isset($_GET["id_quiz"]) == false) {
                         echo "Lobby not set";
                         exit;
                     }
@@ -63,8 +63,9 @@
                     } else {
                         $nickname =  $_GET["nickname"];
                         $lobby->join_lobby($lobbyId, $nickname);
-                        if(isset($_SESSION['userId']) == false)
-                            $_SESSION['userId'] = "visitor"; //TODO It's ded
+                        if (isset($_SESSION['userId']) == false) {
+                            $_SESSION['userName'] = "visitor"; //TODO It's ded
+                        }
                     }
                     echo 'Joined the lobby, ';
                     echo 'Waiting admin to launch the quiz! ';
