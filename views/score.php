@@ -1,5 +1,5 @@
 <?php 
-showController("GameController");s
+showController("GameController");
 showView("header"); 
 $game = $_SESSION['gameSession'];?>
 <h3>The Quiz is finished !</h3>

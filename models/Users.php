@@ -8,7 +8,7 @@ class Users
         $stmt = Database::getInstance();
 
         $results = $stmt->query($sql);
-        $row = $results->fetch_assoc(); //list
+        $row = $results->fetch_assoc();
 
         $results->free();
 
@@ -21,7 +21,6 @@ class Users
 
     protected function setUser($username, $email, $pwd)
     {
-
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user (username,email,pwd) VALUES ('$username','$email','$hashedPwd');"; //TODO use bind
         $stmt = Database::getInstance();
@@ -29,7 +28,19 @@ class Users
         if ($stmt->query($sql) === TRUE) {
             return true;
         } else {
-            echo "Error: " . $sql . "<br>" . $stmt->error; //TODO change echo
+            error_log("Error: " . $sql . "<br>" . $stmt->error);
+            return false;
+        }
+    }
+
+    protected function updateUser($username, $useremail, $newpwd, $currentemail){
+        $sql = "UPDATE user SET username = '$username', email = '$useremail', pwd = '$newpwd' WHERE email = '$currentemail'";
+        $stmt = Database::getInstance();
+
+        if ($stmt->query($sql) === TRUE) {
+            return true;
+        } else {
+            error_log("Error: " . $sql . "<br>" . $stmt->error);
             return false;
         }
     }

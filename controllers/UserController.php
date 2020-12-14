@@ -19,12 +19,11 @@ class UserController extends Users
             exit();
         }
 
-        session_start(); // TODO to modify
+        session_start();
 
         $_SESSION["userId"] = $results["id_user"];
         $_SESSION["userName"] = $results["username"];
         $_SESSION["userMail"] = $results["email"];
-
 
         header('location: index');
         exit();
@@ -44,30 +43,23 @@ class UserController extends Users
         }
     }
 
-    public function updateUser()
+    public function update_User()
     {
-        $requser = $phpprojectbd->prepare("SELECT * FROM user WHERE id = ?");
-        $requser->execute(array($_SESSION['id']));
-        $user = $requser->fetch();
-        if(isset($_POST['newusername']) AND !empty($_POST['newusername']) AND $_POST['newusername'] != $user['username']) {
-           $newusername = htmlspecialchars($_POST['newusername']);
-           $insertusername = $bphpprojectbd->prepare("UPDATE user SET username = ? WHERE id = ?");
-           $insertusername->execute(array($newusername, $_SESSION['id']));
-           header('Location: settings.php?id='.$_SESSION['id']);
+        $username = $_POST['userName'];
+        $useremail = $_POST['userEmail'];
+        $newpwd = $_POST['newPwd'];
+        $currentemail = $_SESSION['userEmail'];
+
+        $result= $this->updateUser($username, $useremail, $newpwd, $currentemail);
+
+        if($result){
+            echo "Votre compte a bien été mis à jour";
         }
-        if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email']) {
-           $newemail = htmlspecialchars($_POST['newemail']);
-           $insertemail = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
-           $insertemail->execute(array($newemail, $_SESSION['id']));
-           header('Location: settings.php?id='.$_SESSION['id']);
+
+        else {
+            echo error_reporting(E_ALL);
         }
-        if(isset($_POST['newpwd']) AND !empty($_POST['newpwd']) AND $_POST['newpwd'] != $user['pwd']) {
-            $newpwd = htmlspecialchars($_POST['newpwd']);
-            $insertpwd = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
-            $insertpwed->execute(array($newpwd, $_SESSION['id']));
-            header('Location: settings.php?id='.$_SESSION['id']);
-         }
-        }
+    }
 
     public function emptyInputLogin($email, $pwd)
     {

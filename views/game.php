@@ -53,35 +53,37 @@ $currentQ = $game->getQuestions()[$game->getCurrentQNb()];
     <div class="row">
         <div class="col-sm-1 col-md-2"></div>
 
-        <section class="col-sm-10 col-md-8">
-            <h3>
-                <?php $numQ = $game->getCurrentQNb() + 1;
-                echo "Question n°" . $numQ; ?>
-            </h3>
-            <div class="game_box">
-                <img src=<?= "public/images/" . $currentQ["imageURL"] . ".jpg" ?> alt="**image de harry potter**">
-                <div class="quiz_question">
-                    <p><?= $currentQ["text"] ?></p>
+            <section class="col-sm-10 col-md-8">
+                <h3>
+                    <?php   $numQ = $game->getCurrentQNb()+1; 
+                            echo "Question n°".$numQ; ?>
+                </h3>
+                <div class="game_box">
+                    <?php if(isset($currentQ["imageURL"])):?>
+                        <img src=<?="public/images/".$currentQ["imageURL"].".jpg"?> alt=<?="image : ".$currentQ["imageURL"].".jpg"?>>
+                    <?php endif;?>
+                    <div class="quiz_question">
+                        <p><?=$currentQ["text"]?></p>
+                    </div>
                 </div>
-            </div>
 
-            <?php
-            $proposalAnswer = $game->getQAnswers($currentQ["id_question"]);
-            shuffle($proposalAnswer);
-            foreach ($proposalAnswer as $answer) : ?>
+                <?php 
+                $proposalAnswer = $game->getQAnswers($currentQ["id_question"]);
+                shuffle($proposalAnswer);
+                foreach($proposalAnswer as $answer):?>
+                    <form action="process_game" method="get">
+                        <input type="hidden" name="id_lobby" value="<?=$game->getLobbyId()?>">
+                        <input type="hidden" name="playerAnswer" value="<?=$answer?>">
+                        <button class="btn btn-primary btn-md mr" type="submit"><?=$answer?></button>
+                    </form>
+                <?php endforeach;?>
+                <br>
                 <form action="process_game" method="get">
-                    <input type="hidden" name="id_lobby" value="<?= $game->getLobbyId() ?>">
-                    <input type="hidden" name="playerAnswer" value="<?= $answer ?>">
-                    <button class="btn btn-primary btn-md mr" type="submit"><?= $answer ?></button>
+                    <button class="btn btn-dark btn-lg mr" type="submit" name="quit">Rage Quit</button>
                 </form>
-            <?php endforeach; ?>
-            <br>
-            <form action="process_game" method="get">
-                <button class="btn btn-dark btn-lg mr" type="submit" name="quit">Rage Quit</button>
-            </form>
-        </section>
-
-    </div>
+            </section>
+            
+        </div> 	
 </body>
 
 <?php showView("footer"); ?>

@@ -1,6 +1,10 @@
 <?php
 include "../core/Config.php";
 
+/**
+ * Class Database
+ * For database management
+ */
 class Database
 {
     private static ?mysqli $instance = null;
@@ -35,29 +39,5 @@ class Database
     public function __destructor()
     {
         return null;
-    }
-
-    /**
-     * Insert:
-     * @access public
-     * @param string $table
-     * @param array $fields
-     * @return string|boolean
-     * @since 1.0.1
-     */
-    public function insert($table, array $fields)
-    {
-        if (count($fields)) {
-            $params = [];
-            foreach ($fields as $key => $value) {
-                $params[":{$key}"] = $value;
-            }
-            $columns = implode("`, `", array_keys($fields));
-            $values = implode(", ", array_keys($params));
-            if (!self::getInstance()->query("INSERT INTO `{$table}` (`{$columns}`) VALUES({$values})", $params)->error()) {
-                return (self::getInstance()->lastInsertId()); // --/!\--
-            }
-        }
-        return false;
     }
 }
