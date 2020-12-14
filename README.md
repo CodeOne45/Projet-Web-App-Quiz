@@ -1,10 +1,9 @@
 # Projet-Web-App-Quiz
+### Simple web based multyplayer quiz application written in php and mysqli. This application can be used to test the knowledge of the player
 
 Projet web DUT 20/21 : Web App Quiz
 
-## Simple web based quiz application written in php and mysqli. This application can be used to test the knowledge of the player
-
-## Project team :
+### Project team :
 - KUMAR Aman (github : CodeOne45)
 - LIN Xiulin (github : Xiumin-Lin)
 - VAN Steven (github : Steven)
