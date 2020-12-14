@@ -21,8 +21,8 @@ Back-end: PHP, MySqli
 
 ### Installation
 
-- Upload Projet-Web-App-Quiz to the directory of your choice.
-- Import data file to XAMPP create a data base called "phpprojectbd" and execute the all .sql files whil are in data.inc.php
+- Upload Projet-Web-App-Quiz to the directory : C:\xampp\htdocs.
+- Import data file to XAMPP create a data base called "phpprojectbd" and execute the all .sql files which are in install folder
 - Launch MySQL server and PHP server
-- Navigate to the installation in your browser
+- Type on your browser : localhost/Projet-Web-App-Quiz/index
 - Done :)
