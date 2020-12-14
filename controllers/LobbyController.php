@@ -55,7 +55,7 @@ class LobbyController
         return $result;
     }
 
-    public function join_lobby($id_lobby, $nickname, ?int $id_user=NULL)
+    public function join_lobby($id_lobby, $nickname, ?int $id_user = NULL)
     {
         $this->lobby->addPlayer($id_lobby, $nickname, $id_user);
     }

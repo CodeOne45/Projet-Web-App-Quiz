@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 showController("LobbyController");
 
@@ -17,8 +18,12 @@ endforeach;
 
 echo "</table>";
 
+
 $start = $lobby->get_lobby($lobby_ID);
 $status = $start["start"];
 if ($status === '1') {
-    echo '<meta http-equiv="refresh" content="0;URL=game?id_lobby=' . $lobby_ID . '"/>';
+    echo '<form action="process_game" method="get">';
+    echo '<input type="hidden" name="id_lobby" value=' . $lobby_ID . '>';
+    echo '<button class="btn btn-primary btn-sm mr" type="submit"> Game is ready !</button>';
+    echo '</form>';
 }

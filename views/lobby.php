@@ -59,21 +59,21 @@
                     $lobbyId = $_SESSION["lobby_Id"];
                     $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
                     if ($pageRefreshed == 1) {
-                        //Donothing
                     } else {
                         $nickname =  $_GET["nickname"];
                         $lobby->join_lobby($lobbyId, $nickname);
-                        if (isset($_SESSION['userId']) == false) {
-                            $_SESSION['userName'] = "visitor"; //TODO It's ded
-                        }
+                        $_SESSION["userName"] = $nickname;
+                        showController("GameController");
                     }
-                    echo 'Joined the lobby, ';
+
+                    echo 'Joined the lobby, ' . $_SESSION["userName"];
                     echo 'Waiting admin to launch the quiz! ';
                     echo 'List of players';
                 } else {
                     echo 'Please login and chose a quiz to create a lobby !';
                 }
                     ?>
+                    </div>
                     <div class="container">
                         <div class="anyClass"></div>
                     </div>
@@ -91,7 +91,6 @@
                             )
                         }
                     </script>
-                    </div>
             </div>
         </div>
         <script>

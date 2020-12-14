@@ -3,7 +3,8 @@ require_once '../models/Database.php';
 
 class Lobby
 {
-    public function random_ID(int $length = 64, string $keyspace = '0123456789'): string {
+    public function random_ID(int $length = 64, string $keyspace = '0123456789'): string
+    {
         if ($length < 1) {
             throw new \RangeException("Length must be a positive integer");
         }
@@ -74,7 +75,7 @@ class Lobby
 
     public function addPlayer($id_lobby, $nickname, ?int $id_user = NULL)
     {
-        if($id_user !== NULL)
+        if ($id_user !== NULL)
             $sql = "INSERT INTO `player` (`id_game`, `nickname`, `id_user`, `score`) VALUES ('$id_lobby', '$nickname', '$id_user', '0');"; //TODO use bind
         else
             $sql = "INSERT INTO `player` (`id_game`, `nickname`, `score`) VALUES ('$id_lobby', '$nickname','0');"; //TODO use bind
@@ -95,12 +96,13 @@ class Lobby
 
         $results = $stmt->query($sql);
 
-        $allPlayers = [];
+        /*$allPlayers = [];
         while ($row = $results->fetch_assoc()) {
             $allPlayers[] = $row;
         }
         $results->free();
-        return $allPlayers;
+        return $allPlayers;*/
+        return $results;
     }
 
     public  function getIdPlayer($id_lobby, $id_user) //work only for admin player
