@@ -22,8 +22,8 @@ Projet web DUT 20/21 : Web App Quiz
 
 ### Tools Used
 
-Front-end : HTML, CSS, Bootstrap
-Back-end: PHP, MySqli
+- Front-end : HTML, CSS, Bootstrap
+- Back-end: PHP, MySqli
 
 ### Installation
 
