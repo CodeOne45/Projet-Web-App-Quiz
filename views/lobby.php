@@ -66,7 +66,7 @@
                         showController("GameController");
                     }
 
-                    echo 'Joined the lobby, ' . $_SESSION["userName"];
+                    echo 'Joined the lobby, ';
                     echo 'Waiting admin to launch the quiz! ';
                     echo 'List of players';
                 } else {

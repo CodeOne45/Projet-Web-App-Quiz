@@ -42,9 +42,10 @@ class GameController
         if ($this->currentQ == $this->nbQuest) {
             session_start();
             $_SESSION['gameSession'] = $this;
-
-            $idPlayer = (new LobbyController())->get_idPlayer($this->id_lobby, $_SESSION['userId']);
-            (new LobbyController())->update_Player($idPlayer['id_player'], $this->getPlayerScore($_SESSION["userId"]));
+            if (isset($_SESSION['userId'])) {
+                $idPlayer = (new LobbyController())->get_idPlayer($this->id_lobby, $_SESSION['userId']);
+                (new LobbyController())->update_Player($idPlayer['id_player'], $this->getPlayerScore($_SESSION["userId"]));
+            }
             header('location: score');
         } elseif (count($this->quiz) != 0 && count($this->questions) !== 0) { //check if quiz is valid and had questions
             session_start();

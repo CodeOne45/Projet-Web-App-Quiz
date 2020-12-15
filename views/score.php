@@ -3,7 +3,7 @@ showController("GameController");
 showView("header");
 $game = $_SESSION['gameSession']; ?>
 <h3>The Quiz is finished !</h3>
-<h2><?= "You had a score of " . $game->getPlayerScore($_SESSION['userId']) . " out of " . $game->getTotalNbQ() ?></h2>
+<h2><?= "You had a score of " . $game->getPlayerScore($_SESSION['userName']) . " out of " . $game->getTotalNbQ() ?></h2>
 
 <form action="process_game" method="get">
     <!--It's the same button that for rage quit-->
