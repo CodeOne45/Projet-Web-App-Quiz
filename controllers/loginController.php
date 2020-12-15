@@ -2,7 +2,7 @@
 require_once 'UserController.php';
 
 /**
- * 
+ * update user information if his log is valid, else send him back to settings page with a error message
  */
 if(isset($_POST["update"])) {
     $newEmail = $_POST["userEmail"];

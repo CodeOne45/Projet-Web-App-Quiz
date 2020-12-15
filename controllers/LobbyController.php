@@ -17,8 +17,8 @@ class LobbyController
     }
 
     /**
-     * @return string
-     * @throws Exception
+     * @return string return a random id for the lobby id
+     * @throws Exception if the generation od random id fail
      */
     public function set_Lobby_ID()
     {
@@ -27,7 +27,7 @@ class LobbyController
 
     /**
      * @param $id_lobby
-     * @return array|false
+     * @return array|false get all lobby's information in a associative array
      */
     public function get_lobby($id_lobby)
     {
@@ -44,6 +44,7 @@ class LobbyController
     }
 
     /**
+     * indicates to the database that the play has started
      * @param $id_lobby
      */
     public function launch_game($id_lobby)
@@ -61,7 +62,7 @@ class LobbyController
 
     /**
      * @param $id_lobby
-     * @return array
+     * @return array return all the players of a game in a associative array
      */
     public function get_players($id_lobby)
     {
@@ -77,13 +78,13 @@ class LobbyController
     /**
      * @param $id_lobby
      * @param $id_user
-     * @return array
+     * @return array return information about a player
      */
     public function get_idPlayer($id_lobby, $id_user)
     {
         $result = $this->lobby->getIdPlayer($id_lobby, $id_user);
         if (!$result) {
-            header('location: lobby?error=player_not_found'); //TODO
+            header('location: lobby?error=player_not_found');
             exit();
         }
         return $result;
@@ -92,7 +93,7 @@ class LobbyController
     /**
      * @param $id_lobby
      * @param $nickname
-     * @param int|null $id_user
+     * @param int|null $id_user it's null for a visitor
      */
     public function join_lobby($id_lobby, $nickname, ?int $id_user=NULL)
     {
@@ -100,6 +101,7 @@ class LobbyController
     }
 
     /**
+     * update the player score (only for admin player)
      * @param $idPlayer
      * @param $score
      */

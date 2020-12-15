@@ -1,6 +1,6 @@
 <?php
 showView("header");
-if (isset($message)) { //TODO ???
+if (isset($message)) {
     echo '<label class="text-danger">.$message.</label>';
 }
 ?>
@@ -22,7 +22,7 @@ if (isset($message)) { //TODO ???
 </div>
 
 <?php
-if (isset($_GET["error"])) {
+if (isset($_GET["error"])) { //Show diffrent error messages
     switch($_GET["error"]) {
         case "emptyInput": 
             echo '<script language="javascript">';

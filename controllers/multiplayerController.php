@@ -1,7 +1,7 @@
 <?php
 session_start();
 /**
- *
+ * For visitor, check if the game has started, if that is the case, show button "Game is ready !"
  */
 showController("LobbyController");
 

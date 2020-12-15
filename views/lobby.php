@@ -8,7 +8,7 @@
                 <?php
                 showController("LobbyController");
                 $lobby = new LobbyController();
-                if (isset($_SESSION["userId"])) {
+                if (isset($_SESSION["userId"])) { //if it's a admin
 
                     $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
                     if ($pageRefreshed == 1) {
@@ -55,7 +55,7 @@
 
                     <?php
 
-                } elseif (!empty($_SESSION["lobby_Id"])) {
+                } elseif (!empty($_SESSION["lobby_Id"])) { //if it's a visitor
                     $lobbyId = $_SESSION["lobby_Id"];
                     $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
                     if ($pageRefreshed == 1) {

@@ -9,13 +9,13 @@
 </div>
 
 <?php
-showController("QuizController"); //TODO line 12-16 to optimize
+showController("QuizController");
 $filter = isset($_GET['search']) ? $_GET['search'] : null;
-$quizControl = new QuizController($filter);
+$quizControl = new QuizController($filter); //get all quiz informations
 $allQuiz = $quizControl->getAllQuizs();
 if (count($allQuiz) == 0) {
     echo "Not Quiz for your search ! Try another search.";
-} else {
+} else { //Generate a quiz box foreach quiz that we had
     foreach ($allQuiz as $quiz) : ?>
         <div class="row" style="display:inline-block">
             <div class="col-sm-6">
@@ -30,7 +30,6 @@ if (count($allQuiz) == 0) {
                             <li class="list-group-item">Number of question : <?= $quiz['nbQuestion'] ?></li>
                             <li class="list-group-item">Theme(s) : <?= $quiz['themes'] ?></li>
                         </ul>
-
 
                         <form action="lobby" method="get">
                             <input type="hidden" name="id_quiz" value=<?= $quiz['id_quiz'] ?>>

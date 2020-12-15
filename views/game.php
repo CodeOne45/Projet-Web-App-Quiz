@@ -6,9 +6,9 @@ if (isset($_SESSION['gameSession']) == false or isset($_GET["id_lobby"]) == fals
     exit;
 }
 $lobby = new LobbyController();
-$lobby->launch_game($_GET["id_lobby"]);
-$game = $_SESSION['gameSession'];
-$currentQ = $game->getQuestions()[$game->getCurrentQNb()];
+$lobby->launch_game($_GET["id_lobby"]); //for the multiplayer : informs visitors that the game has started
+$game = $_SESSION['gameSession'];       //get all information about the game session
+$currentQ = $game->getQuestions()[$game->getCurrentQNb()]; //the number of the current question show on the page
 ?>
 
 <body>

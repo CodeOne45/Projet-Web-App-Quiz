@@ -2,11 +2,12 @@
 include_once '../models/Users.php';
 
 /**
- * Class UserController
+ * Class UserController : for the management of user
  */
 class UserController extends Users
 {
     /**
+     * Check if log is valid and set user sessions if that is the case, else send to login page with a error message
      * @param $email
      * @param $pwd
      */
@@ -37,6 +38,7 @@ class UserController extends Users
     }
 
     /**
+     * Check is user's inputs are valid, if yes, register the user
      * @param $username
      * @param $email
      * @param $pwd
@@ -56,11 +58,12 @@ class UserController extends Users
     }
 
     /**
-     * @param $username     new userName    (can be the same as the last one)
-     * @param $useremail    new email       (can be the same as the last one)
-     * @param $newpwd       new password    (can be the same as the last one)
-     * @param $currentemail current email of the user
-     * @param $currentpwd   current password of the user
+     * Update a user if his log are valid
+     * @param $username     "new userName    (can be the same as the last one)"
+     * @param $useremail    "new email       (can be the same as the last one)"
+     * @param $newpwd       "new password    (can be the same as the last one)"
+     * @param $currentemail "current email of the user"
+     * @param $currentpwd   "current password of the user"
      */
     public function update_User($username, $useremail, $newpwd, $currentemail, $currentpwd)
     {
@@ -92,7 +95,7 @@ class UserController extends Users
     /**
      * @param $email
      * @param $pwd
-     * @return bool
+     * @return bool true if one of Login inputs are empty
      */
     public function emptyInputLogin($email, $pwd)
     {
@@ -103,7 +106,7 @@ class UserController extends Users
      * @param $username
      * @param $email
      * @param $pwd
-     * @return bool
+     * @return bool true if one of SignUp inputs are empty
      */
     public function emptyInputSignUp($username, $email, $pwd)
     {
@@ -112,7 +115,7 @@ class UserController extends Users
 
     /**
      * @param $email
-     * @return bool
+     * @return bool true if the email is in a invalid format
      */
     public function invalidEmail($email)
     {

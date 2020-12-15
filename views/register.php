@@ -25,7 +25,7 @@
     </div>
 
     <?php
-    if (isset($_GET["error"])) {
+    if (isset($_GET["error"])) { //Show diffrent error messages
         switch ($_GET["error"]) {
             case "emptyInput":
                 echo "<p> Please, fill in all the information</p>"; break;

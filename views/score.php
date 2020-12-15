@@ -1,4 +1,4 @@
-<?php
+<?php //The show the score that the player in the last game session
 showController("GameController");
 showView("header");
 $game = $_SESSION['gameSession']; ?>

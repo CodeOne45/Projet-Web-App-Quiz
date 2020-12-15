@@ -1,7 +1,7 @@
 <?php
 require_once 'UserController.php';
 /**
- *
+ * Register a user if all input is valid
  */
 if (isset($_POST["submit"])) {
 

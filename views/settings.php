@@ -2,7 +2,7 @@
 
 <h1>Settings</h1>
 
-<!-- form -->
+<!-- form for update user information -->
 <form action="process_login" method="post">
 
     <div class="form-group">
