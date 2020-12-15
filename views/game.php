@@ -2,7 +2,7 @@
 showController("GameController");
 showView("header");
 if (isset($_SESSION['gameSession']) == false or isset($_GET["id_lobby"]) == false) {
-    echo "GAME NOT SET"; //TODO Create a game not set page
+    echo "GAME NOT SET";
     exit;
 }
 $lobby = new LobbyController();
@@ -59,9 +59,11 @@ $currentQ = $game->getQuestions()[$game->getCurrentQNb()];
                 echo "Question n°" . $numQ; ?>
             </h3>
             <div class="game_box">
-                <img src=<?= "public/images/" . $currentQ["imageURL"] . ".jpg" ?> alt="**image de harry potter**">
+                <?php if(isset($currentQ["imageURL"])):?>
+                    <img src=<?= "public/images/" . $currentQ["imageURL"] . ".jpg" ?> alt="image" width="400" height="300">
+                <?php endif;?>
                 <div class="quiz_question">
-                    <p><?= $currentQ["text"] ?></p>
+                    <h4><?= $currentQ["text"] ?></h4>
                 </div>
             </div>
 
@@ -86,6 +88,7 @@ $currentQ = $game->getQuestions()[$game->getCurrentQNb()];
 
 <?php showView("footer"); ?>
 
+<!--Chrono script-->
 <script language="JavaScript">
     var startTime = 0
     var start = 0

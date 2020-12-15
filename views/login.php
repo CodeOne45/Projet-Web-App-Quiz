@@ -35,7 +35,6 @@ if (isset($_GET["error"])) {
         case "wrongPwd":
             echo "Wrong Password";
     }
-
 }
 
 ?>

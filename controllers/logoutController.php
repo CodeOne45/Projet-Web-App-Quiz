@@ -1,7 +1,8 @@
 <?php
 
-//destroy session login
-
+/**
+ * destroy session login
+ */
 session_start();
 session_unset();
 session_destroy();

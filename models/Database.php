@@ -5,6 +5,9 @@ class Database
 {
     private static ?mysqli $instance = null;
 
+    /**
+     * Database constructor.
+     */
     private function __construct()
     {
         $serverName = core\Config::get("DATABASE_HOST");
@@ -24,6 +27,9 @@ class Database
         }
     }
 
+    /**
+     * @return mysqli|null
+     */
     public static function getInstance()
     {
         if (self::$instance == null) {
@@ -32,6 +38,9 @@ class Database
         return self::$instance;
     }
 
+    /**
+     * @return null
+     */
     public function __destructor()
     {
         return null;

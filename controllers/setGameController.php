@@ -1,4 +1,7 @@
 <?php
+/**
+ *
+ */
 require_once 'GameController.php';
 session_start();
 // print_r($_SESSION); //for find error
@@ -7,7 +10,6 @@ session_start();
 if (isset($_GET["quit"])) {
     $_SESSION['gameSession'] = NULL;
     $_SESSION['lobby_Id'] = NULL;
-
     header('location: quiz');
 }
 if (isset($_GET["id_lobby"])) {

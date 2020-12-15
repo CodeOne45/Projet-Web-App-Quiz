@@ -59,6 +59,7 @@
                     $lobbyId = $_SESSION["lobby_Id"];
                     $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' ||  $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
                     if ($pageRefreshed == 1) {
+                        //Donothing
                     } else {
                         $nickname =  $_GET["nickname"];
                         $lobby->join_lobby($lobbyId, $nickname);

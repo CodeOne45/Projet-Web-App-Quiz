@@ -7,7 +7,7 @@ Projet web DUT 20/21 : Web App Quiz
 ### Project team :
 
 - KUMAR Aman (github : CodeOne45)
-- LIN Xiulin (github : Xiumin-Lin)
+- LIN Xiumin (github : Xiumin-Lin)
 - VAN Steven (github : Steven)
 - ROBALO RODRIGUES Flavio (github : kvpso270 )
 - KHALFAOUI Loqman (github : lokiklf )

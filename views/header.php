@@ -8,9 +8,8 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
+    <meta name="description" content="Quiz Game">
+    <meta name="author" content="Aman Kumar, Flavio Robalo Rodrigues, Loqman Khalfaoui, Steven Van, Xiumin Lin + (Bootstrap contributors)">
     <title>QuizApp</title>
 
 
@@ -33,9 +32,6 @@ session_start();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
                 </li>
 
                 <?php if (isset($_SESSION["userId"])) { ?>

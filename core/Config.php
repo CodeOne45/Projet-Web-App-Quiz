@@ -4,7 +4,6 @@ namespace core;
 
 class Config
 {
-
     /** @var array The contents of the configuration file. */
     private static $_config = [];
 

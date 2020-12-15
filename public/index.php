@@ -1,6 +1,6 @@
 <?php
 
-if (strpos($_SERVER['REQUEST_URI'], '.') !== false) { //TODO Not Work :(
+if (strpos($_SERVER['REQUEST_URI'], '.') !== false) {
     return false;
     exit;
 }

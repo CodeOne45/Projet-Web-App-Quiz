@@ -1,7 +1,14 @@
 <?php
 include_once 'Database.php';
-class QuizModel { //a changer, pas d'extends
 
+/**
+ * Class QuizModel
+ */
+class QuizModel { //a changer, pas d'extends
+    /**
+     * @param string $filter
+     * @return array
+     */
     public function getAllQuizs(string $filter){
         $mysqli = Database::getInstance();
         if(empty($filter))
@@ -37,6 +44,10 @@ class QuizModel { //a changer, pas d'extends
         return $allQuiz;
     }
 
+    /**
+     * @param string $id
+     * @return array|null
+     */
     public function getQuiz(string $id){
         $mysqli = Database::getInstance();
         $sql = "SELECT * FROM quiz WHERE id_quiz=?";
@@ -58,6 +69,10 @@ class QuizModel { //a changer, pas d'extends
         return $row;
     }
 
+    /**
+     * @param int $quizId
+     * @return array
+     */
     public function getAllQuestions(int $quizId){ //Retourne tous les questions d'un quiz
         $stmt = Database::getInstance();
         $sql = "SELECT * FROM question WHERE id_quiz = $quizId";
@@ -74,10 +89,18 @@ class QuizModel { //a changer, pas d'extends
         return $allQuestions;
     }
 
+    /**
+     * @param int $quizId
+     * @return int
+     */
     public function getNbQuestion(int $quizId){ //Retourne le nombre de questions d'un quiz
         return count($allQuestions = $this->getAllQuestions($quizId));
     }
 
+    /**
+     * @param int $questionId
+     * @return array|null
+     */
     public function getAllAnswerQuest(int $questionId){
         $mysqli = Database::getInstance();
         $sql = "SELECT goodAnswer, badAnswer, badAnswer2, badAnswer3 FROM question WHERE id_question=?";
@@ -98,6 +121,10 @@ class QuizModel { //a changer, pas d'extends
         return $row;
     }
 
+    /**
+     * @param int $quizId
+     * @return string
+     */
     public function getAllThemes(int $quizId) : string{
         $allQuestions = $this->getAllQuestions($quizId);
         if(count($allQuestions) == 0)
@@ -114,6 +141,10 @@ class QuizModel { //a changer, pas d'extends
         return implode("; ", $themeList);
     }
 
+    /**
+     * @param int $quizId
+     * @return float|string
+     */
     public function getLevel(int $quizId){
         $allQuestions = $this->getAllQuestions($quizId);
         if(count($allQuestions) == 0)

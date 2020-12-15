@@ -1,8 +1,15 @@
 <?php
 include_once '../models/Users.php';
 
+/**
+ * Class UserController
+ */
 class UserController extends Users
 {
+    /**
+     * @param $email
+     * @param $pwd
+     */
     public function loginUser($email, $pwd)
     {
         $results = $this->getUser($email);
@@ -19,17 +26,21 @@ class UserController extends Users
             exit();
         }
 
-        session_start(); // TODO to modify
+        session_start();
 
         $_SESSION["userId"] = $results["id_user"];
         $_SESSION["userName"] = $results["username"];
         $_SESSION["userMail"] = $results["email"];
 
-
         header('location: index');
         exit();
     }
 
+    /**
+     * @param $username
+     * @param $email
+     * @param $pwd
+     */
     public function registerUser($username, $email, $pwd)
     {
         if ($this->getUser($email) !== false) {
@@ -44,41 +55,65 @@ class UserController extends Users
         }
     }
 
-    public function updateUser()
+    /**
+     * @param $username     new userName    (can be the same as the last one)
+     * @param $useremail    new email       (can be the same as the last one)
+     * @param $newpwd       new password    (can be the same as the last one)
+     * @param $currentemail current email of the user
+     * @param $currentpwd   current password of the user
+     */
+    public function update_User($username, $useremail, $newpwd, $currentemail, $currentpwd)
     {
-        $requser = $phpprojectbd->prepare("SELECT * FROM user WHERE id = ?");
-        $requser->execute(array($_SESSION['id']));
-        $user = $requser->fetch();
-        if(isset($_POST['newusername']) AND !empty($_POST['newusername']) AND $_POST['newusername'] != $user['username']) {
-           $newusername = htmlspecialchars($_POST['newusername']);
-           $insertusername = $bphpprojectbd->prepare("UPDATE user SET username = ? WHERE id = ?");
-           $insertusername->execute(array($newusername, $_SESSION['id']));
-           header('Location: settings.php?id='.$_SESSION['id']);
-        }
-        if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $user['email']) {
-           $newemail = htmlspecialchars($_POST['newemail']);
-           $insertemail = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
-           $insertemail->execute(array($newemail, $_SESSION['id']));
-           header('Location: settings.php?id='.$_SESSION['id']);
-        }
-        if(isset($_POST['newpwd']) AND !empty($_POST['newpwd']) AND $_POST['newpwd'] != $user['pwd']) {
-            $newpwd = htmlspecialchars($_POST['newpwd']);
-            $insertpwd = $phpprojectbd->prepare("UPDATE user SET mail = ? WHERE id = ?");
-            $insertpwed->execute(array($newpwd, $_SESSION['id']));
-            header('Location: settings.php?id='.$_SESSION['id']);
-         }
+        $results = $this->getUser($currentemail);
+        if (!$results) {
+            header("location: settings?error=$currentemail");
+            exit();
         }
 
+        $pwdHashed = $results["pwd"];
+        $checkPwd = password_verify($currentpwd, $pwdHashed);
+
+        if ($checkPwd) {
+            $isUpdate= $this->updateUser($username, $useremail, $newpwd, $currentemail);
+            if($isUpdate){
+                session_start();
+                $_SESSION["userName"] = $username;
+                $_SESSION["userMail"] = $useremail;
+                header('location: settings?Update=OK');
+                exit();
+            }
+            header('location: settings?Update=Fail');
+            exit();
+        }
+        header('location: settings?error=wrongPwd');
+        exit();
+    }
+
+    /**
+     * @param $email
+     * @param $pwd
+     * @return bool
+     */
     public function emptyInputLogin($email, $pwd)
     {
         return empty($email) || empty($pwd);
     }
 
+    /**
+     * @param $username
+     * @param $email
+     * @param $pwd
+     * @return bool
+     */
     public function emptyInputSignUp($username, $email, $pwd)
     {
         return (empty($username) || empty($email) || empty($pwd));
     }
 
+    /**
+     * @param $email
+     * @return bool
+     */
     public function invalidEmail($email)
     {
         return (!filter_var($email, FILTER_VALIDATE_EMAIL));

@@ -51,12 +51,3 @@ if ($explodedTarget[0] === "view")
     showView($explodedTarget[1]);
 else
     showController($explodedTarget[1]);
-
-//exit();
-// echo var_dump($_SERVER); //TODO Only active during Tests
-// echo "===================";
-// echo var_dump($_SESSION);
-// echo "===================";
-// echo var_dump($_GET);
-// echo "===================";
-// echo var_dump($_POST);

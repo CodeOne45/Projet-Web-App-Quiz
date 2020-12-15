@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+/**
+ *
+ */
 showController("LobbyController");
 
 $lobby_ID = $_SESSION["lobby_Id"];
