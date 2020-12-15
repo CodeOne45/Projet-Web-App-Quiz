@@ -36,7 +36,7 @@ Projet web DUT 20/21 : Web App Quiz
 ### Installation
 
 - Upload Projet-Web-App-Quiz to the directory : `C:\xampp\htdocs`
-- Launch MySQL server and PHP server
+- Start MySQL server and Apache server
 - Import data file to XAMPP:
   - Go to : `localhost/phpmyadmin`
   - Create a data base called "phpprojectbd"
