@@ -2,10 +2,14 @@
 require_once '../models/Database.php';
 
 /**
- * Class Users
+ * Class Users : Use the Database class to manage a user for register, login and settings pages
  */
 class Users
 {
+    /**
+     * @param $email
+     * @return array|false Returns all the user's information in an associative array
+     */
     protected function getUser($email)
     {
         $sql = "SELECT * FROM user WHERE email = '$email';";
@@ -19,15 +23,15 @@ class Users
         if ($row === NULL) {
             return false;
         }
-
         return $row;
     }
 
     /**
+     * Register a user
      * @param $username
      * @param $email
-     * @param $pwd
-     * @return bool
+     * @param $pwd "password"
+     * @return bool true if query has been done else false with a message in error_log()
      */
     protected function setUser($username, $email, $pwd)
     {
@@ -48,7 +52,7 @@ class Users
      * @param $useremail
      * @param $newpwd
      * @param $currentemail
-     * @return bool
+     * @return bool true if update has been done else false with a message in error_log()
      */
     protected function updateUser($username, $useremail, $newpwd, $currentemail){
         $hashedPwd = password_hash($newpwd, PASSWORD_DEFAULT);

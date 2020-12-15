@@ -3,8 +3,7 @@ include_once '../models/QuizModel.php';
 include_once 'LobbyController.php';
 
 /**
- * Class GameController
- * For the management of the game page.
+ * Class GameController : For the management of the game page.
  */
 class GameController{
     private int $id_lobby;

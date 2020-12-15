@@ -2,7 +2,7 @@
 include_once '../models/Lobby.php';
 
 /**
- * Class LobbyController
+ * Class LobbyController : For the management of the lobby page.
  */
 class LobbyController
 {

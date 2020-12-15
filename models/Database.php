@@ -1,12 +1,16 @@
 <?php
 include "../core/Config.php";
 
+/**
+ * Class Database : For the management of the database.
+ * This class is a singleton. Call getInstance() to get the database
+ */
 class Database
 {
     private static ?mysqli $instance = null;
 
     /**
-     * Database constructor.
+     * Database private constructor. To instantiate only once the class. The data information is defined in Config.php
      */
     private function __construct()
     {
@@ -22,13 +26,13 @@ class Database
         }
 
         if (!self::$instance->set_charset("utf8")) {
-            printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n", self::$instance->error);
+            error_log("Erreur lors du chargement du jeu de caractères utf8 : %s\n", self::$instance->error);
             exit();
         }
     }
 
     /**
-     * @return mysqli|null
+     * @return mysqli|null instance of the database
      */
     public static function getInstance()
     {
@@ -39,34 +43,10 @@ class Database
     }
 
     /**
-     * @return null
+     * destroy the instance
      */
     public function __destructor()
     {
-        return null;
-    }
-
-    /**
-     * Insert:
-     * @access public
-     * @param string $table
-     * @param array $fields
-     * @return string|boolean
-     * @since 1.0.1
-     */
-    public function insert($table, array $fields)
-    {
-        if (count($fields)) {
-            $params = [];
-            foreach ($fields as $key => $value) {
-                $params[":{$key}"] = $value;
-            }
-            $columns = implode("`, `", array_keys($fields));
-            $values = implode(", ", array_keys($params));
-            if (!self::getInstance()->query("INSERT INTO `{$table}` (`{$columns}`) VALUES({$values})", $params)->error()) {
-                return (self::getInstance()->lastInsertId()); // --/!\--
-            }
-        }
-        return false;
+        self::$instance = null;
     }
 }
