@@ -1,5 +1,5 @@
 # Projet-Web-App-Quiz
-
+![alt text](https://img.freepik.com/vecteurs-libre/quiz-dans-style-bande-dessinee-pop-art_175838-505.jpg?size=626&ext=jpg)
 ### Simple web based multyplayer quiz application written in php and mysqli. This application can be used to test the knowledge of the player
 
 Projet web DUT 20/21 : Web App Quiz
