@@ -12,9 +12,15 @@ Projet web DUT 20/21 : Web App Quiz
 - ROBALO RODRIGUES Flavio (github : kvpso270 )
 - KHALFAOUI Loqman (github : lokiklf )
 
-### Full Demo
+### Features :
 
-[PHP Quiz]
+- Login, Register & logout system --> Creat an account
+- Profille modification --> Update your name, email or password
+- Play Quiz : [Must be login]
+  - Singleplayer : Creat a quiz to play solo and get your score
+  - Multyplayer : A real time lobby is available. Share the lobby link to your friends to join the Quiz :). 
+    Every time a player join the lobby, his name app appears in lobby. When the admin start the quiz
+    a "Geme is ready button appears" in lobby for players to start the quiz.
 
 ### Requirements
 
@@ -37,3 +43,7 @@ Projet web DUT 20/21 : Web App Quiz
   - Execute the all .sql files which are in install folder
 - Type on your browser : `localhost/Projet-Web-App-Quiz/index`
 - Done :)
+
+### Full Demo
+
+We will add some photos ;)
